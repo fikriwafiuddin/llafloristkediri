@@ -13,6 +13,7 @@ import {
 import { dashboard } from '@/routes';
 import categories from '@/routes/categories';
 import products from '@/routes/products';
+import testimonials from '@/routes/testimonials';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
 import {
@@ -21,6 +22,7 @@ import {
     Folder,
     FolderIcon,
     LayoutGrid,
+    StarIcon,
 } from 'lucide-react';
 import AppLogo from './app-logo';
 
@@ -39,6 +41,11 @@ const mainNavItems: NavItem[] = [
         title: 'Produk',
         href: products.index(),
         icon: FlowerIcon,
+    },
+    {
+        title: 'Testimoni',
+        href: testimonials.index(),
+        icon: StarIcon,
     },
 ];
 

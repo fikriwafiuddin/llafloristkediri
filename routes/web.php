@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\TestimonialsController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Laravel\Fortify\Features;
@@ -20,6 +21,8 @@ Route::middleware(['auth', 'verified'])->prefix("/admin")->group(function () {
     Route::resource('categories', CategoryController::class);
 
     Route::resource('products', ProductController::class);
+
+    Route::resource('testimonials', TestimonialsController::class);
 });
 
 require __DIR__.'/settings.php';

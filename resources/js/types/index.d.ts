@@ -19,6 +19,14 @@ export interface Product {
     };
 }
 
+export interface Testimony {
+    id: number;
+    customer_name: string;
+    rating: number;
+    review: string;
+    created_at: Date;
+}
+
 export interface Auth {
     user: User;
 }
