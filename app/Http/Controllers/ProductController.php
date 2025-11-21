@@ -2,17 +2,37 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\products\ProductRequestCreate;
+use App\Http\Requests\products\ProductRequestUpdate;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
+use App\services\CategoryService;
+use App\Services\ProductService;
 
 class ProductController extends Controller
 {
+    protected $productService;
+    protected $categoryService;
+
+    public function __construct(ProductService $productService, CategoryService $categoryService) {
+        $this->productService = $productService;
+        $this->categoryService = $categoryService;
+    }
+
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $categories = $this->categoryService->getAll();
+        $products = $this->productService->getAll($request);
+
+        return Inertia::render("admin/products/index/page", [
+            'products' => $products,
+            "categories" => $categories,
+            "filters" => $request->only(['search', 'category'])
+        ]);
     }
 
     /**
@@ -20,15 +40,21 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        $categories = $this->categoryService->getAll();
+
+        return Inertia::render('admin/products/create/page', [
+            'categories' => $categories
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ProductRequestCreate $request)
     {
-        //
+        $this->productService->create($request->validated());
+
+        return to_route('products.index')->with('success', 'Produk berhasil ditambah');
     }
 
     /**
@@ -42,24 +68,34 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Product $product)
+    public function edit(int $id)
     {
-        //
+        $product = $this->productService->getById($id);
+        $categories = $this->categoryService->getAll();
+
+        return Inertia::render('admin/products/update/page', [
+            'product' => $product,
+            'categories' => $categories
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Product $product)
+    public function update(ProductRequestUpdate $request, int $id)
     {
-        //
+        $this->productService->update($request->validated(), $id);
+
+        return to_route('products.index')->with('success', 'Produk berhasil diupdate');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Product $product)
+    public function destroy(int $id)
     {
-        //
+        $this->productService->destroy($id);
+
+        return to_route('products.index')->with('success', 'Produk berhasil dihapus');
     }
 }

@@ -6,6 +6,19 @@ export interface Category {
     name: string;
 }
 
+export interface Product {
+    id: number;
+    name: string;
+    price: number;
+    description: string;
+    image: string;
+    category_id: number;
+    category?: {
+        id: number;
+        name: string;
+    };
+}
+
 export interface Auth {
     user: User;
 }

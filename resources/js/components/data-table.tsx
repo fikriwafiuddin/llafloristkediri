@@ -74,7 +74,7 @@ export function DataTable<TData, TValue>({
                                 colSpan={columns.length}
                                 className="h-24 text-center"
                             >
-                                Data masih kosong.
+                                Data kosong.
                             </TableCell>
                         </TableRow>
                     )}
