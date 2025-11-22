@@ -13,6 +13,36 @@ a {
     cursor: pointer;
 }
 
+.overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        135deg,
+        rgba(254, 246, 247, 0.85) 0%,
+        rgba(240, 249, 244, 0.85) 100%
+    );
+}
+
+@keyframes bounceY {
+    0%,
+    100% {
+        transform: translateY(-5%);
+    }
+    50% {
+        transform: translateY(0);
+    }
+}
+
+.bounce-y {
+    animation: bounceY 3s ease-in-out infinite;
+}
+
+.card-hover {
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
 @theme {
     --font-sans:
         'Instrument Sans', ui-sans-serif, system-ui, sans-serif,

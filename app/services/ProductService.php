@@ -67,6 +67,11 @@ class ProductService
                 ->withQueryString();;
     }
 
+    public function getSome(int $limit)
+    {
+        return Product::limit($limit)->with('category')->get();
+    }
+
     private function uploadImage(UploadedFile $image)
     {
         return $image->store('products', 'public');

@@ -3,15 +3,19 @@
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\TestimonialsController;
+use App\Http\Controllers\User\AboutController;
+use App\Http\Controllers\User\CatalogController;
+use App\Http\Controllers\User\ContactController;
+use App\Http\Controllers\User\HomeController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Laravel\Fortify\Features;
 
-Route::get('/', function () {
-    return Inertia::render('welcome', [
-        'canRegister' => Features::enabled(Features::registration()),
-    ]);
-})->name('home');
+// Route::get('/', function () {
+//     return Inertia::render('welcome', [
+//         'canRegister' => Features::enabled(Features::registration()),
+//     ]);
+// })->name('home');
 
 Route::middleware(['auth', 'verified'])->prefix("/admin")->group(function () {
     Route::get('dashboard', function () {
@@ -23,6 +27,13 @@ Route::middleware(['auth', 'verified'])->prefix("/admin")->group(function () {
     Route::resource('products', ProductController::class);
 
     Route::resource('testimonials', TestimonialsController::class);
+});
+
+Route::name('user.')->group(function() {
+    Route::get('/', [HomeController::class, 'index'])->name('home.index');
+    Route::get('/catalog', [CatalogController::class, 'index'])->name('catalog.index');
+    Route::get('/about', [AboutController::class, 'index'])->name('about.index');
+    Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
 });
 
 require __DIR__.'/settings.php';
