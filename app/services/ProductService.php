@@ -51,7 +51,7 @@ class ProductService
         return $product;
     }
 
-    public function getAll(object $request)
+    public function getAll(object $request, int $limit = 10)
     {
         return Product::query()
                 ->when($request->search, function ($query, $search) {
@@ -61,10 +61,18 @@ class ProductService
                     if (!empty($request->category)) {
                         $query->where('category_id', (int) $request->category);
                     }
+                })->when($request->filled('price_sort'), function ($query) use ($request) {
+                    $direction = strtolower($request->price_sort);
+
+                    if (in_array($direction, ['asc', 'desc'])) {
+                        $query->orderBy('price', $direction);
+                    }
+                })->unless($request->filled('price_sort'), function ($query) {
+                    $query->latest(); 
                 })
                 ->with('category')
-                ->paginate(10)
-                ->withQueryString();;
+                ->paginate($limit)
+                ->withQueryString();
     }
 
     public function getSome(int $limit)
