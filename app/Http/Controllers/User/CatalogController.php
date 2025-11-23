@@ -28,4 +28,15 @@ class CatalogController extends Controller
             'categories' => $categories
         ]);
     }
+
+    public function show(int $id): View
+    {
+        $product = $this->productService->getById($id);
+        $relatedProducts = $this->productService->getRelatedByCategory($product['category_id'], $product['id']);
+
+        return view('user.detail-product', [
+            'product' => $product,
+            'relatedProducts' => $relatedProducts
+        ]);
+    }
 }

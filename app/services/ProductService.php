@@ -80,6 +80,17 @@ class ProductService
         return Product::limit($limit)->with('category')->get();
     }
 
+    public function getRelatedByCategory(int $category_id, int $excludeId, int $limit = 4)
+    {
+        $query = Product::where('category_id', $category_id);
+
+        if ($excludeId) {
+            $query->where('id', '!=', $excludeId);
+        }
+
+        return $query->limit($limit)->get();
+    }
+
     private function uploadImage(UploadedFile $image)
     {
         return $image->store('products', 'public');

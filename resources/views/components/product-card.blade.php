@@ -1,4 +1,4 @@
-@props(['image', 'name', 'description', 'category', 'price'])
+@props(['id', 'image', 'name', 'description', 'category', 'price'])
 
 <div class="rounded-xl border bg-card text-card-foreground shadow group overflow-hidden card-hover">
    <div class="relative overflow-hidden">
@@ -24,7 +24,7 @@
             </span>
         </div>
         <div class="grid sm:grid-cols-2 gap-2 pt-2">
-            <a href="">
+            <a href="{{ route('user.catalog.show', $id) }}">
                 <x-button
                     variant="outline"
                     class="w-full"

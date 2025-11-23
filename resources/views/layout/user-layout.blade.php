@@ -15,6 +15,7 @@
 
     <x-footer/>
 
+    @yield('script')
     <script>
         const mobileSidebar = document.getElementById('mobileSidebar');
         const sidebarBackdrop = document.getElementById('sidebarBackdrop');

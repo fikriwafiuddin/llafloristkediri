@@ -31,6 +31,7 @@ Route::middleware(['auth', 'verified'])->prefix("/admin")->group(function () {
 
 Route::name('user.')->group(function() {
     Route::get('/', [HomeController::class, 'index'])->name('home.index');
+    Route::get('/catalog/{id}', [CatalogController::class, 'show'])->name('catalog.show');
     Route::get('/catalog', [CatalogController::class, 'index'])->name('catalog.index');
     Route::get('/about', [AboutController::class, 'index'])->name('about.index');
     Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
