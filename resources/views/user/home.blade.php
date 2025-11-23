@@ -155,20 +155,50 @@
                 <p class="text-center">Rangkaian bunga terpopuler untuk berbagai acara spesial Anda</p>
             </div>
 
+            <div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    @foreach ($products as $product)
+                        <x-product-card
+                            :id="$product['id']"
+                            :image="$product['image']"
+                            :name="$product['name']"
+                            :description="$product['description']"
+                            :category="$product['category']['name']"
+                            :price="$product['price']"
+                        />
+                    @endforeach
+                </div>
+
+                <div class="flex justify-center mt-6">
+                    <a href="{{ route('user.catalog.index') }}">
+                        <x-button variant="outline">
+                            Lihat Semua Produk
+                        </x-button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {{-- Testimonilas Section --}}
+    <div class="relative py-16 px-8 bg-gradient-to-br from-pink-50 to-green-50 mb-20">
+        <div class="container mx-auto px-4 space-y-8">
+            <div>
+                <h1 class="text-center text-4xl font-playfair-display font-bold">Ulasan Pemesan</h1>
+                <p class="text-center">Beberapa ulasan dari beberapa orang yang telah memesan produk kami</p>
+            </div>
+
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                @foreach ($products as $product)
-                    <x-product-card
-                        :id="$product['id']"
-                        :image="$product['image']"
-                        :name="$product['name']"
-                        :description="$product['description']"
-                        :category="$product['category']['name']"
-                        :price="$product['price']"
+                @foreach ($testimonials as $testimony)
+                    <x-testimony-card
+                        :customer_name="$testimony['customer_name']"
+                        :rating="$testimony['rating']"
+                        :review="$testimony['review']"
                     />
                 @endforeach
             </div>
         </div>
-    </section>
+    </div>
 
     {{-- CTAS Section --}}
     <section class="py-16 bg-gradient-to-r from-pink-100 to-green-100" data-testid="cta-section">

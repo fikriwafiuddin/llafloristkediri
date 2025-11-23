@@ -30,6 +30,11 @@ class TestimonyService
         return Testimonials::query()->paginate(10);
     }
 
+    public function getSome(int $limit)
+    {
+        return Testimonials::limit($limit)->latest()->get();
+    }
+
     public function getById(int $id)
     {
         return Testimonials::findOrFail($id);
