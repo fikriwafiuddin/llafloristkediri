@@ -14,13 +14,13 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->string("customer_name", 55);
-            $table->string("whatsapp_number", 13);
+            $table->string("whatsapp_number", 20);
             $table->text("address");
-            $table->integer("budget");
-            $table->enum("status", ["finished", "unfinished", "canceled"]);
+            $table->enum("status", ["completed", "process", "canceled"]);
             $table->boolean("is_paid");
             $table->enum("shipping_method", ["delivery", "pickup"]);
-            $table->date("schedule");
+            $table->dateTime("schedule");
+            $table->integer('total_amount');
             $table->text("notes")->nullable();
             $table->timestamps();
         });
