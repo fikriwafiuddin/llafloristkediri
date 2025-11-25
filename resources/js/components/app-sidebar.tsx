@@ -12,11 +12,13 @@ import {
 } from '@/components/ui/sidebar';
 import { dashboard } from '@/routes';
 import categories from '@/routes/categories';
+import materials from '@/routes/materials';
 import products from '@/routes/products';
 import testimonials from '@/routes/testimonials';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
 import {
+    ArchiveIcon,
     BookOpen,
     FlowerIcon,
     Folder,
@@ -46,6 +48,11 @@ const mainNavItems: NavItem[] = [
         title: 'Testimoni',
         href: testimonials.index(),
         icon: StarIcon,
+    },
+    {
+        title: 'Bahan',
+        href: materials.index(),
+        icon: ArchiveIcon,
     },
 ];
 

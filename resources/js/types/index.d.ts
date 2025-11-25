@@ -27,6 +27,13 @@ export interface Testimony {
     created_at: Date;
 }
 
+export interface Material {
+    id: number;
+    name: string;
+    price: number;
+    stock: number;
+}
+
 export interface Auth {
     user: User;
 }
