@@ -22,9 +22,9 @@
                         </svg>
                     </div>
                     <div>
-                        <h3 class="font-bold text-gray-700">Alamat Studio</h3>
+                        <h3 class="font-bold text-gray-700">Alamat 
                         <p class="text-gray-600 text-sm mt-1">
-                            Jl. Selomangleng, Pojok
+                            Jl. Selomangleng, 
                             Kecamatan Mojoroto, Kediri<br>
                             Jawa Timur, Indonesia
                         </p>
@@ -56,7 +56,7 @@
                         <h3 class="font-bold text-gray-700">Jam Operasional</h3>
                         <p class="text-gray-600 text-sm mt-1">
                             Senin - Sabtu: 08.00 - 20.00 WIB<br>
-                            Minggu: 09.00 - 15.00 WIB
+                            Minggu: 08.00-12.00 WIB
                         </p>
                     </div>
                 </div>
