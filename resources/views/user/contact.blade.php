@@ -1,4 +1,4 @@
-{{-- PERHATIKAN BARIS PERTAMA INI --}}
+
 @extends('layout.user-layout') 
 
 @section('content')
