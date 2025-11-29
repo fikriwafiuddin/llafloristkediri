@@ -16,3 +16,16 @@ export function isSameUrl(
 export function resolveUrl(url: NonNullable<InertiaLinkProps['href']>): string {
     return typeof url === 'string' ? url : url.url;
 }
+
+export function translateStatus(status: string): string {
+    switch (status) {
+        case 'process':
+            return 'Diproses';
+        case 'completed':
+            return 'Selesai';
+        case 'cancelled':
+            return 'Dibatalkan';
+        default:
+            return status;
+    }
+}

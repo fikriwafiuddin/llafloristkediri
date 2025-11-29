@@ -27,7 +27,11 @@ class OrderController extends Controller
      */
     public function index()
     {
-        return Inertia::render('admin/pos/page');
+        $orders = $this->orderService->getAll();
+
+        return Inertia::render('admin/orders/index/page', [
+            'orders' => $orders
+        ]);
     }
 
     /**

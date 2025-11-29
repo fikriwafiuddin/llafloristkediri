@@ -66,6 +66,13 @@ class OrderService
         });
     }
 
+    public function getAll()
+    {
+        $orders = Order::query()->paginate(10);
+
+        return $orders;
+    }
+
     public function getById (int $id) {
         $order = Order::findOrFail($id);
 

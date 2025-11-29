@@ -34,6 +34,19 @@ export interface Material {
     stock: number;
 }
 
+export interface Order {
+    id: number;
+    customer_name: string;
+    whatsapp_number: string;
+    address: string;
+    schedule: Date;
+    total_amount: number;
+    is_paid: boolean;
+    shipping_method: 'delivery' | 'pickup';
+    status: string;
+    created_at: Date;
+}
+
 export interface Auth {
     user: User;
 }

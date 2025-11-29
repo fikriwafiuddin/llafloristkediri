@@ -90,6 +90,9 @@ input[type='time'] {
     --color-destructive: var(--destructive);
     --color-destructive-foreground: var(--destructive-foreground);
 
+    --color-success: var(--success);
+    --color-success-foreground: var(--success-foreground);
+
     --color-border: var(--border);
     --color-input: var(--input);
     --color-ring: var(--ring);
@@ -127,6 +130,8 @@ input[type='time'] {
     --accent-foreground: oklch(0.4475 0.0385 356.9548);
     --destructive: oklch(0.6333 0.2001 24.932);
     --destructive-foreground: oklch(1 0 0);
+    --success: oklch(0.7188 0.1403 136.3174);
+    --success-foreground: oklch(1 0 0);
     --border: oklch(0.9025 0.0117 345.4804);
     --input: oklch(0.9204 0.0065 345.3272);
     --ring: oklch(0.7658 0.0966 358.0374);
@@ -192,6 +197,8 @@ input[type='time'] {
     --accent-foreground: oklch(0.8772 0.0136 355.0329);
     --destructive: oklch(0.5972 0.1977 25.5155);
     --destructive-foreground: oklch(1 0 0);
+    --success: oklch(0.6561 0.1339 143.8617);
+    --success-foreground: oklch(1 0 0);
     --border: oklch(0.4084 0.0241 346.6187);
     --input: oklch(0.3333 0.0186 346.5402);
     --ring: oklch(0.8161 0.063 356.7176);
