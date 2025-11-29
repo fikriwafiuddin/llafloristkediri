@@ -25,7 +25,7 @@
                         <h3 class="font-bold text-gray-700">Alamat 
                         <p class="text-gray-600 text-sm mt-1">
                             Jl. Selomangleng, 
-                            Kecamatan Mojoroto, Kediri<br>
+                            Kecamatan Mojoroto,Kota Kediri<br>
                             Jawa Timur, Indonesia
                         </p>
                     </div>
@@ -39,7 +39,7 @@
                     </div>
                     <div>
                         <h3 class="font-bold text-gray-700">WhatsApp / Telepon</h3>
-                        <p class="text-gray-600 text-sm mt-1">+62 812-3456-7890</p>
+                        <p class="text-gray-600 text-sm mt-1">08560693276</p>
                         <a href="https://wa.me/6281234567890" target="_blank" class="text-pink-500 text-sm font-semibold hover:underline mt-1 block">
                             Chat Admin Sekarang &rarr;
                         </a>
