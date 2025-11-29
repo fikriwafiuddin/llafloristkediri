@@ -33,6 +33,7 @@ Route::middleware(['auth', 'verified'])->prefix("/admin")->group(function () {
     Route::resource('materials', MaterialController::class);
 
     Route::resource('orders', OrderController::class);
+    Route::get('pos', [OrderController::class, 'pos'])->name('orders.pos');
 });
 
 Route::name('user.')->group(function() {

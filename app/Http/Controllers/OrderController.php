@@ -86,4 +86,16 @@ class OrderController extends Controller
     {
         //
     }
+
+    public function pos(Request $request)
+    {
+        $products = $this->produceService->getAll($request, 12);
+        $categories = $this->categoryService->getAll();
+
+        return Inertia::render('admin/pos/page', [
+            'products' => $products,
+            'categories' => $categories,
+            'filters' => $request->only(['search, category'])
+        ]);
+    }
 }

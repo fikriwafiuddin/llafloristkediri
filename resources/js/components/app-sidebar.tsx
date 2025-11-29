@@ -57,8 +57,13 @@ const mainNavItems: NavItem[] = [
         icon: ArchiveIcon,
     },
     {
+        title: 'Pesanan',
+        href: orders.index(),
+        icon: BookOpen,
+    },
+    {
         title: 'POS',
-        href: orders.create(),
+        href: orders.pos(),
         icon: TouchpadIcon,
     },
 ];
