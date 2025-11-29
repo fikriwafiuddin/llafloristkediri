@@ -13,6 +13,7 @@ import {
 import { dashboard } from '@/routes';
 import categories from '@/routes/categories';
 import materials from '@/routes/materials';
+import orders from '@/routes/orders';
 import products from '@/routes/products';
 import testimonials from '@/routes/testimonials';
 import { type NavItem } from '@/types';
@@ -25,6 +26,7 @@ import {
     FolderIcon,
     LayoutGrid,
     StarIcon,
+    TouchpadIcon,
 } from 'lucide-react';
 import AppLogo from './app-logo';
 
@@ -53,6 +55,11 @@ const mainNavItems: NavItem[] = [
         title: 'Bahan',
         href: materials.index(),
         icon: ArchiveIcon,
+    },
+    {
+        title: 'POS',
+        href: orders.create(),
+        icon: TouchpadIcon,
     },
 ];
 

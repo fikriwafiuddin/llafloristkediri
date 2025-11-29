@@ -43,6 +43,17 @@ a {
         box-shadow 0.3s ease;
 }
 
+/* HIDE NATIVE TIME ICON (Chrome, Edge) */
+input[type='time']::-webkit-calendar-picker-indicator {
+    display: none;
+}
+
+/* FOR FIREFOX */
+input[type='time'] {
+    appearance: textfield;
+    -moz-appearance: textfield;
+}
+
 @theme {
     --font-sans:
         'Instrument Sans', ui-sans-serif, system-ui, sans-serif,

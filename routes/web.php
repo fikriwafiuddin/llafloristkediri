@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\MaterialController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\TestimonialsController;
 use App\Http\Controllers\User\AboutController;
@@ -30,6 +31,8 @@ Route::middleware(['auth', 'verified'])->prefix("/admin")->group(function () {
     Route::resource('testimonials', TestimonialsController::class);
 
     Route::resource('materials', MaterialController::class);
+
+    Route::resource('orders', OrderController::class);
 });
 
 Route::name('user.')->group(function() {
