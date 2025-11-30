@@ -66,6 +66,19 @@ class OrderService
         });
     }
 
+    public function update(array $data, int $id)
+    {
+        $schedule = Carbon::parse($data['schedule'])
+                ->setTimezone('Asia/Jakarta')
+                ->format('Y-m-d H:i:s');
+        
+        $data['schedule'] = $schedule;
+        
+        $order = $this->getById($id);
+
+        return $order->update($data);
+    }
+
     public function getAll()
     {
         $orders = Order::query()->paginate(10);

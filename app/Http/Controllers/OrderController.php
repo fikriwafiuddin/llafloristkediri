@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Orders\OrderRequestCreate;
+use App\Http\Requests\Orders\OrderRequestUpdate;
 use App\Models\Order;
 use App\services\CategoryService;
 use App\Services\OrderService;
@@ -75,17 +76,23 @@ class OrderController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Order $order)
+    public function edit(int $id)
     {
-        //
+        $order = $this->orderService->getById($id);
+
+        return Inertia::render('admin/orders/update/page', [
+            'order' => $order
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Order $order)
+    public function update(OrderRequestUpdate $request, int $id)
     {
-        //
+        $this->orderService->update($request->validated(), $id);
+
+        return to_route('orders.index')->with('success', 'Data pesanan berhasil diperbarui.');
     }
 
     /**

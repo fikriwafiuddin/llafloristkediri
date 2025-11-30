@@ -9,13 +9,13 @@ import {
     SelectValue,
 } from '@/components/ui/select';
 import { translateStatus } from '@/lib/utils';
-import { show } from '@/routes/orders';
+import { edit, show } from '@/routes/orders';
 import { Order } from '@/types';
 import { Link } from '@inertiajs/react';
 import { ColumnDef } from '@tanstack/react-table';
 import { format } from 'date-fns';
 import { id } from 'date-fns/locale';
-import { EyeIcon, TrashIcon } from 'lucide-react';
+import { EditIcon, EyeIcon, TrashIcon } from 'lucide-react';
 
 const columns: ColumnDef<Order>[] = [
     {
@@ -96,11 +96,18 @@ const columns: ColumnDef<Order>[] = [
     {
         header: 'Aksi',
         cell: ({ row }) => {
+            const id = row.original.id;
+
             return (
                 <div className="flex gap-2">
-                    <Link href={show(row.original.id)}>
+                    <Link href={show(id)}>
                         <Button variant="outline">
                             <EyeIcon />
+                        </Button>
+                    </Link>
+                    <Link href={edit(id)}>
+                        <Button>
+                            <EditIcon />
                         </Button>
                     </Link>
                     <Button variant="destructive">
