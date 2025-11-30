@@ -98,9 +98,11 @@ class OrderController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Order $order)
+    public function destroy(int $id)
     {
-        //
+        $this->orderService->delete($id);
+
+        return to_route('orders.index')->with('success', 'Data pesanan berhasil dihapus.');
     }
 
     public function pos(Request $request)

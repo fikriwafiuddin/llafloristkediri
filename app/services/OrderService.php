@@ -73,10 +73,17 @@ class OrderService
                 ->format('Y-m-d H:i:s');
         
         $data['schedule'] = $schedule;
-        
+
         $order = $this->getById($id);
 
         return $order->update($data);
+    }
+
+    public function delete(int $id)
+    {
+        $order = $this->getById($id);
+
+        return $order->delete();
     }
 
     public function getAll()

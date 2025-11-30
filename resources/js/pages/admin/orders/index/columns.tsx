@@ -15,7 +15,8 @@ import { Link } from '@inertiajs/react';
 import { ColumnDef } from '@tanstack/react-table';
 import { format } from 'date-fns';
 import { id } from 'date-fns/locale';
-import { EditIcon, EyeIcon, TrashIcon } from 'lucide-react';
+import { EditIcon, EyeIcon } from 'lucide-react';
+import DeleteOrder from '../DeleteOrder';
 
 const columns: ColumnDef<Order>[] = [
     {
@@ -110,9 +111,7 @@ const columns: ColumnDef<Order>[] = [
                             <EditIcon />
                         </Button>
                     </Link>
-                    <Button variant="destructive">
-                        <TrashIcon />
-                    </Button>
+                    <DeleteOrder id={id} />
                 </div>
             );
         },
