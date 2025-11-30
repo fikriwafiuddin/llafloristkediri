@@ -57,7 +57,7 @@ class OrderController extends Controller
     {
         $order = $this->orderService->create($request->validated());
 
-        return back();
+        return to_route('orders.show', ['order' => $order->id]);
     }
 
     /**
