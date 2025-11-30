@@ -19,6 +19,8 @@ use Laravel\Fortify\Features;
 //     ]);
 // })->name('home');
 
+Route::get('/orders/{id}/pdf/stream', [OrderController::class, 'streamPdf'])->name('orders.pdf.stream');
+
 Route::middleware(['auth', 'verified'])->prefix("/admin")->group(function () {
     Route::get('dashboard', function () {
         return Inertia::render('dashboard');

@@ -7,6 +7,7 @@ use App\Models\Order;
 use App\services\CategoryService;
 use App\Services\OrderService;
 use App\Services\ProductService;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -105,5 +106,12 @@ class OrderController extends Controller
             'categories' => $categories,
             'filters' => $request->only(['search, category'])
         ]);
+    }
+
+    public function streamPdf(int $id)
+    {
+        $order = $this->orderService->getById($id);
+
+        return view('order_pdf', ['order' => $order]);
     }
 }

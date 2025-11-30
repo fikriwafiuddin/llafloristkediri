@@ -1,22 +1,23 @@
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import {
-    Item,
-    ItemContent,
-    ItemDescription,
-    ItemMedia,
-    ItemTitle,
-} from '@/components/ui/item';
+import { Item, ItemContent, ItemMedia, ItemTitle } from '@/components/ui/item';
 import { Separator } from '@/components/ui/separator';
 import AppLayout from '@/layouts/app-layout';
 import { formatCurrency, translateStatus } from '@/lib/utils';
 import { index, show } from '@/routes/orders';
+import { stream } from '@/routes/orders/pdf';
 import { BreadcrumbItem, Order, OrderItem } from '@/types';
 import { Head, Link } from '@inertiajs/react';
 import { format } from 'date-fns';
 import { id } from 'date-fns/locale';
-import { ArrowLeftIcon, PuzzleIcon } from 'lucide-react';
+import {
+    ArrowLeftIcon,
+    CopyIcon,
+    DownloadIcon,
+    PuzzleIcon,
+} from 'lucide-react';
+import { toast } from 'sonner';
 
 const breadcrumbs = (id: number): BreadcrumbItem[] => [
     {
@@ -34,7 +35,6 @@ type OrderShowPageProps = {
 };
 
 function OrderShowPage({ order }: OrderShowPageProps) {
-    console.log(order);
     return (
         <AppLayout breadcrumbs={breadcrumbs(order.id)}>
             <Head title="Detail Pesanan" />
@@ -50,9 +50,41 @@ function OrderShowPage({ order }: OrderShowPageProps) {
 
                 <Card>
                     <CardHeader>
-                        <CardTitle>Detail Pesanan</CardTitle>
+                        <div className="space-y-2">
+                            <CardTitle>Detail Pesanan</CardTitle>
+                        </div>
                     </CardHeader>
                     <CardContent>
+                        <div className="mb-2 flex justify-end gap-2">
+                            <Button
+                                variant="outline"
+                                onClick={() => {
+                                    const url =
+                                        window.location.origin +
+                                        stream(order.id).url;
+                                    navigator.clipboard
+                                        .writeText(url)
+                                        .then(() =>
+                                            toast.success(
+                                                'Link berhasil disalin!',
+                                            ),
+                                        )
+                                        .catch(() =>
+                                            toast.error('Gagal menyalin link'),
+                                        );
+                                }}
+                            >
+                                <CopyIcon /> Salin link
+                            </Button>
+                            <Button
+                                variant="outline"
+                                onClick={() =>
+                                    window.open(stream(order.id).url, '_blank')
+                                }
+                            >
+                                <DownloadIcon /> Unduh
+                            </Button>
+                        </div>
                         <div className="space-y-4 text-sm">
                             <div>
                                 <h3 className="mb-1 text-base font-semibold">
@@ -183,7 +215,7 @@ function OrderShowPage({ order }: OrderShowPageProps) {
                                                                 Custom
                                                             </Badge>
                                                         </ItemTitle>
-                                                        <ItemDescription className="space-x-2">
+                                                        <div className="space-x-2 text-xs text-muted-foreground">
                                                             <span>
                                                                 {item.quantity.toLocaleString()}
                                                             </span>
@@ -193,18 +225,17 @@ function OrderShowPage({ order }: OrderShowPageProps) {
                                                                     item.unit_price,
                                                                 )}
                                                             </span>
-                                                            <span>=</span>
-                                                            <span>
-                                                                {formatCurrency(
-                                                                    item.subtotal,
-                                                                )}
-                                                            </span>
-                                                            <p>
-                                                                {
-                                                                    item.custom_description
-                                                                }
-                                                            </p>
-                                                        </ItemDescription>
+                                                        </div>
+                                                        <span className="font-semibold">
+                                                            {formatCurrency(
+                                                                item.subtotal,
+                                                            )}
+                                                        </span>
+                                                        <p>
+                                                            {
+                                                                item.custom_description
+                                                            }
+                                                        </p>
                                                     </ItemContent>
                                                 </>
                                             ) : (
@@ -223,7 +254,7 @@ function OrderShowPage({ order }: OrderShowPageProps) {
                                                         <ItemTitle className="line-clamp-1">
                                                             {item.product?.name}
                                                         </ItemTitle>
-                                                        <ItemDescription className="space-x-2">
+                                                        <div className="space-x-2 text-xs text-muted-foreground">
                                                             <span>
                                                                 {item.quantity.toLocaleString()}
                                                             </span>
@@ -233,13 +264,12 @@ function OrderShowPage({ order }: OrderShowPageProps) {
                                                                     item.unit_price,
                                                                 )}
                                                             </span>
-                                                            <span>=</span>
-                                                            <span>
-                                                                {formatCurrency(
-                                                                    item.subtotal,
-                                                                )}
-                                                            </span>
-                                                        </ItemDescription>
+                                                        </div>
+                                                        <span className="font-semibold">
+                                                            {formatCurrency(
+                                                                item.subtotal,
+                                                            )}
+                                                        </span>
                                                     </ItemContent>
                                                 </>
                                             )}
