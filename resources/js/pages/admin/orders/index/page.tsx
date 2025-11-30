@@ -1,11 +1,13 @@
 import AppPagination from '@/components/app-pagination';
 import { DataTable } from '@/components/data-table';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import AppLayout from '@/layouts/app-layout';
 import { index, pos } from '@/routes/orders';
 import { BreadcrumbItem, Order } from '@/types';
-import { Head, Link } from '@inertiajs/react';
+import { Head, Link, usePage } from '@inertiajs/react';
+import { CheckCircleIcon } from 'lucide-react';
 import columns from './columns';
 
 const breadcrumbs: BreadcrumbItem[] = [
@@ -28,6 +30,8 @@ type OrderIndexPageProps = {
 };
 
 function OrderIndexPage({ orders }: OrderIndexPageProps) {
+    const { flash } = usePage<{ flash: { success: string } }>().props;
+
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Pesanan" />
@@ -38,6 +42,14 @@ function OrderIndexPage({ orders }: OrderIndexPageProps) {
                         <Button>+ Tambah Pesanan</Button>
                     </Link>
                 </div>
+
+                {flash.success && (
+                    <Alert>
+                        <CheckCircleIcon />
+                        <AlertTitle>Success</AlertTitle>
+                        <AlertDescription>{flash.success}</AlertDescription>
+                    </Alert>
+                )}
 
                 <Card>
                     <CardHeader>
