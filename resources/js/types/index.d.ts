@@ -34,7 +34,7 @@ export interface Material {
     stock: number;
 }
 
-export interface Order {
+export interface Order extends TimeStamp {
     id: number;
     customer_name: string;
     whatsapp_number: string;
@@ -43,8 +43,27 @@ export interface Order {
     total_amount: number;
     is_paid: boolean;
     shipping_method: 'delivery' | 'pickup';
+    notes: string | null;
     status: string;
     created_at: Date;
+}
+
+export interface OrderItem {
+    id: number;
+    order_id: number;
+    product_id: number | null;
+    is_custom: number;
+    quantity: number;
+    unit_price: number;
+    subtotal: number;
+    product?: Product | null;
+    custom_name?: string | null;
+    custom_description?: string | null;
+}
+
+export interface TimeStamp {
+    created_at: Date;
+    updated_at: Date;
 }
 
 export interface Auth {

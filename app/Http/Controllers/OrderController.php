@@ -62,9 +62,13 @@ class OrderController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Order $order)
+    public function show(int $id)
     {
-        //
+        $order = $this->orderService->getById($id);
+
+        return Inertia::render('admin/orders/show/page', [
+            'order' => $order
+        ]);
     }
 
     /**

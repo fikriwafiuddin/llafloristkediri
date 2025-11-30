@@ -74,7 +74,7 @@ class OrderService
     }
 
     public function getById (int $id) {
-        $order = Order::findOrFail($id);
+        $order = Order::select()->with(['orderItems.product'])->findOrFail($id);
 
         return $order;
     }
