@@ -39,8 +39,8 @@
                     </div>
                     <div>
                         <h3 class="font-bold text-gray-700">WhatsApp / Telepon</h3>
-                        <p class="text-gray-600 text-sm mt-1">08560693276</p>
-                        <a href="https://wa.me/6281234567890" target="_blank" class="text-pink-500 text-sm font-semibold hover:underline mt-1 block">
+                        <p class="text-gray-600 text-sm mt-1">085808933346</p>
+                        <a href="https://wa.me/6285808933346" target="_blank" class="text-pink-500 text-sm font-semibold hover:underline mt-1 block">
                             Chat Admin Sekarang &rarr;
                         </a>
                     </div>
