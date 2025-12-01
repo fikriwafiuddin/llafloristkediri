@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Orders\OrderRequestCreate;
 use App\Http\Requests\Orders\OrderRequestUpdate;
+use App\Http\Requests\Orders\OrderRequestUpdateStatus;
 use App\Models\Order;
 use App\services\CategoryService;
 use App\Services\OrderService;
@@ -27,12 +28,13 @@ class OrderController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $orders = $this->orderService->getAll();
+        $orders = $this->orderService->getAll($request);
 
         return Inertia::render('admin/orders/index/page', [
-            'orders' => $orders
+            'orders' => $orders,
+            'filters' => $request->only(['customer_name', 'whatsapp', 'year', 'month', 'status', 'payment', 'shipping_method'])
         ]);
     }
 
@@ -115,6 +117,11 @@ class OrderController extends Controller
             'categories' => $categories,
             'filters' => $request->only(['search, category'])
         ]);
+    }
+
+    public function updateStatus(OrderRequestUpdateStatus $request, int $id)
+    {
+        $this->orderService->updateStatus($request->validated(), $id);
     }
 
     public function streamPdf(int $id)

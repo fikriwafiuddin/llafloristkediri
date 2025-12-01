@@ -3,12 +3,15 @@ import { DataTable } from '@/components/data-table';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+
 import AppLayout from '@/layouts/app-layout';
+
 import { index, pos } from '@/routes/orders';
 import { BreadcrumbItem, Order } from '@/types';
 import { Head, Link, usePage } from '@inertiajs/react';
 import { CheckCircleIcon } from 'lucide-react';
 import columns from './columns';
+import FiltersSection from './FiltersSection';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -27,9 +30,18 @@ type OrderIndexPageProps = {
         }[];
         current_page: number;
     };
+    filters: {
+        customer_name: string;
+        whatsapp: string;
+        year: string;
+        month: string;
+        status: string;
+        payment: string;
+        shipping_method: string;
+    };
 };
 
-function OrderIndexPage({ orders }: OrderIndexPageProps) {
+function OrderIndexPage({ orders, filters }: OrderIndexPageProps) {
     const { flash } = usePage<{ flash: { success: string } }>().props;
 
     return (
@@ -53,9 +65,11 @@ function OrderIndexPage({ orders }: OrderIndexPageProps) {
 
                 <Card>
                     <CardHeader>
-                        <CardTitle>List Produk</CardTitle>
+                        <CardTitle>List Pesanan</CardTitle>
                     </CardHeader>
                     <CardContent className="space-y-4">
+                        <FiltersSection filters={filters} />
+
                         <DataTable columns={columns} data={orders.data} />
                         <AppPagination
                             links={orders.links}

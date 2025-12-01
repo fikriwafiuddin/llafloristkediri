@@ -36,6 +36,7 @@ Route::middleware(['auth', 'verified'])->prefix("/admin")->group(function () {
 
     Route::resource('orders', OrderController::class);
     Route::get('pos', [OrderController::class, 'pos'])->name('orders.pos');
+    Route::patch('update-status/{id}', [OrderController::class, 'updateStatus'])->name('orders.updateStatus');
 });
 
 Route::name('user.')->group(function() {

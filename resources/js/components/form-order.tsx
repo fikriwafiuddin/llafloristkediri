@@ -144,7 +144,7 @@ function FormOrder({ order, type = 'ADD' }: FormOrderProps) {
                             </SelectTrigger>
                             <SelectContent>
                                 <SelectGroup>
-                                    {['process', 'completed', 'cancelled'].map(
+                                    {['process', 'completed', 'canceled'].map(
                                         (status) => (
                                             <SelectItem
                                                 key={status}
@@ -157,6 +157,7 @@ function FormOrder({ order, type = 'ADD' }: FormOrderProps) {
                                 </SelectGroup>
                             </SelectContent>
                         </Select>
+                        <InputError message={errors.status} />
                     </div>
                 )}
 

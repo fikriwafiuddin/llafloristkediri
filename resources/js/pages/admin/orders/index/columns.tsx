@@ -1,14 +1,5 @@
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import {
-    Select,
-    SelectContent,
-    SelectGroup,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from '@/components/ui/select';
-import { translateStatus } from '@/lib/utils';
 import { edit, show } from '@/routes/orders';
 import { Order } from '@/types';
 import { Link } from '@inertiajs/react';
@@ -17,6 +8,7 @@ import { format } from 'date-fns';
 import { id } from 'date-fns/locale';
 import { EditIcon, EyeIcon } from 'lucide-react';
 import DeleteOrder from '../DeleteOrder';
+import UpdateStatus from '../UpdateStatus';
 
 const columns: ColumnDef<Order>[] = [
     {
@@ -30,6 +22,14 @@ const columns: ColumnDef<Order>[] = [
     {
         accessorKey: 'whatsapp_number',
         header: 'No. WhatsApp',
+    },
+    {
+        accessorKey: 'created_at',
+        header: 'Dibuat',
+        cell: ({ row }) =>
+            format(row.original.created_at, 'dd MMMM yyyy HH:mm', {
+                locale: id,
+            }),
     },
     {
         accessorKey: 'schedule',
@@ -54,24 +54,7 @@ const columns: ColumnDef<Order>[] = [
         accessorKey: 'status',
         header: 'Status',
         cell: ({ row }) => {
-            return (
-                <Select defaultValue={row.original.status}>
-                    <SelectTrigger>
-                        <SelectValue placeholder="Pilih status" />
-                    </SelectTrigger>
-                    <SelectContent>
-                        <SelectGroup>
-                            {['process', 'completed', 'cancelled'].map(
-                                (status) => (
-                                    <SelectItem key={status} value={status}>
-                                        {translateStatus(status)}
-                                    </SelectItem>
-                                ),
-                            )}
-                        </SelectGroup>
-                    </SelectContent>
-                </Select>
-            );
+            return <UpdateStatus order={row.original} />;
         },
     },
     {
