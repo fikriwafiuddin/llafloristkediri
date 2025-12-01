@@ -79,6 +79,13 @@ class OrderService
         return $order->update($data);
     }
 
+    public function updateStatus (array $data, int $id)
+    {
+        $order = $this->getById($id);
+
+        return $order->update(['status' => $data['status']]);
+    }
+
     public function delete(int $id)
     {
         $order = $this->getById($id);
