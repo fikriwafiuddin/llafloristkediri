@@ -26,6 +26,7 @@ function CartSheet({ onChangeMode }: CartSheetProps) {
     const deleteItem = useCartStore((state) => state.deleteItem);
     const totalAmount = useCartStore((state) => state.getTotalAmount());
     const updateQuantity = useCartStore((state) => state.updateQuantity);
+    const clearCart = useCartStore((state) => state.clearCart);
 
     return (
         <div className="flex items-center justify-end gap-2">
@@ -46,6 +47,12 @@ function CartSheet({ onChangeMode }: CartSheetProps) {
                         </SheetDescription>
                     </SheetHeader>
                     <ScrollArea className="flex-1 overflow-hidden">
+                        {items.length < 1 && (
+                            <p className="p-4 text-center text-sm text-muted-foreground">
+                                Keranjang kosong
+                            </p>
+                        )}
+
                         <div className="flex flex-col gap-2 px-4">
                             {items.map((item, index) =>
                                 item.is_custom ? (
@@ -201,12 +208,22 @@ function CartSheet({ onChangeMode }: CartSheetProps) {
 
                     <SheetFooter>
                         <p>Total: Rp {totalAmount.toLocaleString()}</p>
-                        <Button
-                            disabled={totalItems < 1}
-                            onClick={() => onChangeMode('form')}
-                        >
-                            Lanjutkan
-                        </Button>
+                        <div className="flex gap-2">
+                            <Button
+                                variant="outline"
+                                className="w-full"
+                                onClick={clearCart}
+                            >
+                                Reset
+                            </Button>
+                            <Button
+                                className="w-full"
+                                disabled={totalItems < 1}
+                                onClick={() => onChangeMode('form')}
+                            >
+                                Lanjutkan
+                            </Button>
+                        </div>
                         <SheetClose asChild>
                             <Button variant="outline">Tutup</Button>
                         </SheetClose>
