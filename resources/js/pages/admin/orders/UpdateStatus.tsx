@@ -39,7 +39,7 @@ function UpdateStatus({ order }: UpdateStatusProps) {
             </SelectTrigger>
             <SelectContent>
                 <SelectGroup>
-                    {['process', 'completed', 'cancelled'].map((status) => (
+                    {['process', 'completed', 'canceled'].map((status) => (
                         <SelectItem key={status} value={status}>
                             {translateStatus(status)}{' '}
                             {processing && data.status === status && (
