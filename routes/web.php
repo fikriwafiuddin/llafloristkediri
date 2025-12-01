@@ -19,6 +19,8 @@ use Laravel\Fortify\Features;
 //     ]);
 // })->name('home');
 
+Route::get('/orders/{id}/pdf/stream', [OrderController::class, 'streamPdf'])->name('orders.pdf.stream');
+
 Route::middleware(['auth', 'verified'])->prefix("/admin")->group(function () {
     Route::get('dashboard', function () {
         return Inertia::render('dashboard');
@@ -33,6 +35,7 @@ Route::middleware(['auth', 'verified'])->prefix("/admin")->group(function () {
     Route::resource('materials', MaterialController::class);
 
     Route::resource('orders', OrderController::class);
+    Route::get('pos', [OrderController::class, 'pos'])->name('orders.pos');
 });
 
 Route::name('user.')->group(function() {
