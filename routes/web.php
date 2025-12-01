@@ -19,8 +19,6 @@ use Laravel\Fortify\Features;
 //     ]);
 // })->name('home');
 
-Route::get('/orders/{id}/pdf/stream', [OrderController::class, 'streamPdf'])->name('orders.pdf.stream');
-
 Route::middleware(['auth', 'verified'])->prefix("/admin")->group(function () {
     Route::get('dashboard', function () {
         return Inertia::render('dashboard');
@@ -35,7 +33,6 @@ Route::middleware(['auth', 'verified'])->prefix("/admin")->group(function () {
     Route::resource('materials', MaterialController::class);
 
     Route::resource('orders', OrderController::class);
-    Route::get('pos', [OrderController::class, 'pos'])->name('orders.pos');
 });
 
 Route::name('user.')->group(function() {
@@ -44,6 +41,10 @@ Route::name('user.')->group(function() {
     Route::get('/catalog', [CatalogController::class, 'index'])->name('catalog.index');
     Route::get('/about', [AboutController::class, 'index'])->name('about.index');
     Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
+    Route::get('/testimoni', function () {
+        return view('user.testimonial');
+    })->name('testimoni.index');
+    
 });
 
 require __DIR__.'/settings.php';
