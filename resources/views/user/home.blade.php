@@ -11,7 +11,7 @@
                 <h1 class="text-center sm:text-left font-playfair-display text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 text-foreground bounce-y">Wujudkan Momen Spesial dengan Bunga Indah</h1>
                 <p class="text-center sm:text-left text-base sm:text-lg mb-8 text-foreground/80">LLa Florist Kediri hadir untuk setiap momen berharga Anda. Dari wisuda, ulang tahun, hingga pernikahan - kami siap melayani dengan rangkaian bunga segar berkualitas tinggi.</p>
                 <div class="flex flex-col justify-center sm:flex-row sm:justify-start gap-2">
-                    <a href="">
+                    <a href="#produk-pilihan">
                         <x-button>
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
