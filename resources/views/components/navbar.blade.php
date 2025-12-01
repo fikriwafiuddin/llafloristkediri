@@ -10,9 +10,13 @@
         ],
         [
             'route' => 'user.about.index',
-            'label' => 'Tetang Kami'
+            'label' => 'Tentang Kami'
         ],
         [
+            'route' => 'user.testimoni.index',
+            'label' => 'Testimoni'
+        ],
+               [
             'route' => 'user.contact.index',
             'label' => 'Kontak'
         ]

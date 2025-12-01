@@ -80,9 +80,9 @@
                         <label class="block text-gray-700 text-sm font-bold mb-2">Pesan</label>
                         <textarea class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-300 h-32" placeholder="Tulis pertanyaan atau pesanan Anda..."></textarea>
                     </div>
-                    <button type="button" class="w-full bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 rounded-lg transition duration-300">
+                    <x-button type="button">
                         Kirim Pesan
-                    </button>
+                    </x-button>
                 </div>
             </form>
         </div>
