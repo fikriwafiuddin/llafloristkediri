@@ -1,4 +1,4 @@
-@extends('user.layout') {{-- Menggunakan layout yang Anda berikan --}}
+@extends('layout.user-layout') {{-- Menggunakan layout yang Anda berikan --}}
 
 @section('title', 'Testimoni') {{-- Mengganti judul halaman --}}
 
@@ -77,23 +77,6 @@
                     </div>
                 </div>
             </div>
-        </section>
-        
-        <hr class="my-12" style="border-top-color: oklch(0.9025 0.0117 345.4804);"/>
-
-        <section class="max-w-xl mx-auto text-center p-8 rounded-xl"
-                 style="background-color: oklch(0.9605 0.0174 48.5355);">
-            <h3 class="text-2xl font-bold mb-4" style="color: oklch(0.5092 0.0205 48.297);">
-                Punya Pengalaman dengan Kami?
-            </h3>
-            <p class="mb-6" style="color: oklch(0.5092 0.0205 48.297);">
-                Kami senang mendengar masukan Anda. Bagikan pengalaman Anda sekarang!
-            </p>
-            {{-- Tombol sesuai skema warna primary --}}
-            <a href="#" class="inline-block px-6 py-3 font-semibold rounded-lg transition duration-300"
-               style="background-color: oklch(0.7215 0.1176 359.0666); color: oklch(1 0 0);">
-                Kirim Testimoni
-            </a>
         </section>
     </main>
 @endsection

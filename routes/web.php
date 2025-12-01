@@ -41,9 +41,9 @@ Route::name('user.')->group(function() {
     Route::get('/catalog', [CatalogController::class, 'index'])->name('catalog.index');
     Route::get('/about', [AboutController::class, 'index'])->name('about.index');
     Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
-    Route::get('/testimoni', function () {
-        return view('user.testimonial');
-    })->name('testimoni.index');
+    Route::get('/testimonials', function() {
+        return view('user.testimoni');
+    })->name('testimonials.index');
     
 });
 

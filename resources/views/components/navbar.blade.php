@@ -13,7 +13,7 @@
             'label' => 'Tentang Kami'
         ],
         [
-            'route' => 'user.testimoni.index',
+            'route' => 'user.testimonials.index',
             'label' => 'Testimoni'
         ],
                [
