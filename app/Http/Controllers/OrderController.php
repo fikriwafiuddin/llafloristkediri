@@ -27,12 +27,13 @@ class OrderController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $orders = $this->orderService->getAll();
+        $orders = $this->orderService->getAll($request);
 
         return Inertia::render('admin/orders/index/page', [
-            'orders' => $orders
+            'orders' => $orders,
+            'filters' => $request->only(['customer_name', 'whatsapp', 'year', 'month', 'status', 'payment', 'shipping_method'])
         ]);
     }
 

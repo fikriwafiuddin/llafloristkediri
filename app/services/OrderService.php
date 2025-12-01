@@ -86,9 +86,46 @@ class OrderService
         return $order->delete();
     }
 
-    public function getAll()
+    public function getAll(object $request)
     {
-        $orders = Order::query()->paginate(10);
+        $year = $request->year ?? Carbon::now()->year;
+        $month = $request->month ?? Carbon::now()->month;
+
+        if (!is_numeric($year) || $year < 2020 || $year > Carbon::now()->year) {
+            $year = Carbon::now()->year;
+        }
+
+        if (!is_numeric($month) || $month < 0 || $month > 11) {
+            $month = Carbon::now()->month;
+        } else {
+            $month = intval($month) + 1;
+        }
+
+        $orders = Order::query()
+                    ->when($request->customer_name, function ($query, $customer_name) {
+                        $query->where('customer_name', 'like', "%{$customer_name}%");
+                    })
+                    ->when($request->whatsapp, function ($query, $whatsapp) {
+                        $query->where('whatsapp_number', 'like', "%{$whatsapp}%");
+                    })
+                    ->whereYear('schedule', $year)
+                    ->whereMonth('schedule', $month)
+                    ->when($request->status !== 'all', function ($query) use ($request) {
+                        if (!empty($request->status)) {
+                            $query->where('status', strtolower($request->status));
+                        }
+                    })
+                    ->when($request->payment !== 'all', function ($query) use ($request) {
+                        if (!empty($request->payment) && in_array(strtolower($request->payment), ['paid', 'unpaid'])) {
+                            $query->where('is_paid', $request->payment === 'paid');
+                        }
+                    })
+                    ->when($request->shipping_method !== 'all', function ($query) use ($request) {
+                        if (!empty($request->shipping_method) && in_array(strtolower($request->shipping_method), ['delivery', 'pickup'])) {
+                            $query->where('shipping_method', $request->shipping_method);
+                        }
+                    })
+                    ->paginate(10);
 
         return $orders;
     }

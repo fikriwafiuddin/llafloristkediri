@@ -32,6 +32,14 @@ const columns: ColumnDef<Order>[] = [
         header: 'No. WhatsApp',
     },
     {
+        accessorKey: 'created_at',
+        header: 'Dibuat',
+        cell: ({ row }) =>
+            format(row.original.created_at, 'dd MMMM yyyy HH:mm', {
+                locale: id,
+            }),
+    },
+    {
         accessorKey: 'schedule',
         header: 'Jadwal',
         cell: ({ row }) =>
