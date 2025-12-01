@@ -76,14 +76,15 @@ function OrderShowPage({ order }: OrderShowPageProps) {
                             >
                                 <CopyIcon /> Salin link
                             </Button>
-                            <Button
-                                variant="outline"
-                                onClick={() =>
-                                    window.open(stream(order.id).url, '_blank')
-                                }
+                            <a
+                                href={stream(order.id).url}
+                                target="_blank"
+                                rel="noopener noreferrer"
                             >
-                                <DownloadIcon /> Unduh
-                            </Button>
+                                <Button variant="outline">
+                                    <DownloadIcon /> Unduh
+                                </Button>
+                            </a>
                         </div>
                         <div className="space-y-4 text-sm">
                             <div>
