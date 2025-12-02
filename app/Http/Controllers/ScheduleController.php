@@ -49,9 +49,13 @@ class ScheduleController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(int $id)
     {
-        //
+        $schedule = $this->orderService->getById($id);
+        
+        return Inertia::render('admin/schedules/show/page', [
+            'schedule' => $schedule
+        ]);
     }
 
     /**
