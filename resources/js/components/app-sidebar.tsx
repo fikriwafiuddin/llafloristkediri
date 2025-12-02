@@ -15,12 +15,14 @@ import categories from '@/routes/categories';
 import materials from '@/routes/materials';
 import orders from '@/routes/orders';
 import products from '@/routes/products';
+import schedules from '@/routes/schedules';
 import testimonials from '@/routes/testimonials';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
 import {
     ArchiveIcon,
     BookOpen,
+    CalendarDaysIcon,
     FlowerIcon,
     Folder,
     FolderIcon,
@@ -45,6 +47,11 @@ const mainNavItems: NavItem[] = [
         title: 'Produk',
         href: products.index(),
         icon: FlowerIcon,
+    },
+    {
+        title: 'Jadwal',
+        href: schedules.index(),
+        icon: CalendarDaysIcon,
     },
     {
         title: 'Testimoni',

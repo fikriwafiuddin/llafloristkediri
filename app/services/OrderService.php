@@ -142,4 +142,85 @@ class OrderService
 
         return $order;
     }
+
+    public function getByDate(?string $date)
+    {
+        if (empty($date)) {
+            $parsedDate = Carbon::now('Asia/Jakarta')->toDateString();
+        } else {
+            try {
+                $parsedDate = Carbon::parse($date)
+                    ->setTimezone('Asia/Jakarta')
+                    ->toDateString();
+            } catch (\Exception $e) {
+                $parsedDate = Carbon::now('Asia/Jakarta')->toDateString();
+            }
+        }
+
+        $orders = Order::query()
+                    ->whereDate('schedule', $parsedDate)
+                    ->with(['orderItems.product'])
+                    ->paginate(10);
+
+        return $orders;
+    }
+
+    public function getByDateRange(string $startDate, string $endDate)
+    {
+        $start = Carbon::parse($startDate)
+            ->setTimezone('Asia/Jakarta')
+            ->toDateString();
+
+        $end = Carbon::parse($endDate)
+            ->setTimezone('Asia/Jakarta')
+            ->toDateString();
+
+        $orders = Order::query()
+                    ->whereBetween('schedule', [$start, $end])
+                    ->with(['orderItems.product'])
+                    ->paginate(10);
+
+        return $orders;
+    }
+
+    public function getStatisticsByDate(?string $date): array
+    {
+        if (empty($date)) {
+            $parsedDate = Carbon::now('Asia/Jakarta')->toDateString();
+        } else {
+            try {
+                $parsedDate = Carbon::parse($date)
+                    ->setTimezone('Asia/Jakarta')
+                    ->toDateString();
+            } catch (\Exception $e) {
+                $parsedDate = Carbon::now('Asia/Jakarta')->toDateString();
+            }
+        }
+
+        $totalSchedules = Order::query()
+                            ->whereDate('schedule', $parsedDate)
+                            ->count();
+
+        $processCount = Order::query()
+                        ->whereDate('schedule', $parsedDate)
+                        ->where('status', 'process')
+                        ->count();
+
+        $completedCount = Order::query()
+                        ->whereDate('schedule', $parsedDate)
+                        ->where('status', 'completed')
+                        ->count();
+
+        $cancelledCount = Order::query()
+                        ->whereDate('schedule', $parsedDate)
+                        ->where('status', 'cancelled')
+                        ->count();
+
+        return [
+            'total' => $totalSchedules,
+            'process' => $processCount,
+            'completed' => $completedCount,
+            'cancelled' => $cancelledCount,
+        ];
+    }
 }

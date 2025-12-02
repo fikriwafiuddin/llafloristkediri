@@ -4,6 +4,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\TestimonialsController;
 use App\Http\Controllers\User\AboutController;
 use App\Http\Controllers\User\CatalogController;
@@ -37,6 +38,8 @@ Route::middleware(['auth', 'verified'])->prefix("/admin")->group(function () {
     Route::resource('orders', OrderController::class);
     Route::get('pos', [OrderController::class, 'pos'])->name('orders.pos');
     Route::patch('update-status/{id}', [OrderController::class, 'updateStatus'])->name('orders.updateStatus');
+
+    Route::resource('schedules', ScheduleController::class);
 });
 
 Route::name('user.')->group(function() {
