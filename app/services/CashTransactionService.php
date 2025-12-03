@@ -22,4 +22,11 @@ class CashTransactionService
 
         return $cashTransactions;
     }
+
+    public function getById(int $id)
+    {
+        $cashTransaction = CashTransaction::findOrFail($id);
+
+        return $cashTransaction;
+    }
 }

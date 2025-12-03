@@ -57,9 +57,13 @@ class CashTransactionController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(CashTransaction $cashTransaction)
+    public function edit(int $id)
     {
-        //
+        $cashTransaction = $this->cashTransactionService->getById($id);
+
+        return Inertia::render('admin/cash_transactions/update/page', [
+            'cashTransaction' => $cashTransaction
+        ]);
     }
 
     /**
