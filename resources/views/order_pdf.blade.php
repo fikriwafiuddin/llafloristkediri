@@ -20,7 +20,7 @@
         }
         
         .header {
-            border-bottom: 3px solid #2563eb;
+            border-bottom: 3px solid #be123c;
             padding-bottom: 20px;
             margin-bottom: 30px;
         }
@@ -28,7 +28,7 @@
         .company-name {
             font-size: 24px;
             font-weight: bold;
-            color: #2563eb;
+            color: #be123c;
             margin-bottom: 5px;
         }
         
@@ -44,7 +44,7 @@
         
         .invoice-title h1 {
             font-size: 28px;
-            color: #2563eb;
+            color: #be123c;
             margin-bottom: 5px;
         }
         
@@ -74,7 +74,7 @@
         
         .status-processing {
             background-color: #dbeafe;
-            color: #1e40af;
+            color: #b3294b;
         }
         
         .info-section {
@@ -91,7 +91,7 @@
         }
         
         .info-box {
-            background-color: #f9fafb;
+            background-color: #fff1f2;
             border: 1px solid #e5e7eb;
             border-radius: 6px;
             padding: 15px;
@@ -100,7 +100,7 @@
         
         .info-box h3 {
             font-size: 13px;
-            color: #2563eb;
+            color: #be123c;
             margin-bottom: 10px;
             border-bottom: 1px solid #e5e7eb;
             padding-bottom: 5px;
@@ -128,7 +128,7 @@
         }
         
         .items-table thead {
-            background-color: #2563eb;
+            background-color: #be123c;
             color: white;
         }
         
@@ -175,7 +175,7 @@
         
         .badge-product {
             background-color: #dbeafe;
-            color: #1e40af;
+            color: #b3294b;
         }
         
         .text-right {
@@ -190,7 +190,7 @@
             float: right;
             width: 300px;
             background-color: #f9fafb;
-            border: 2px solid #2563eb;
+            border: 2px solid #be123c;
             border-radius: 6px;
             padding: 15px;
         }
@@ -203,7 +203,7 @@
         }
         
         .summary-row.total {
-            border-top: 2px solid #2563eb;
+            border-top: 2px solid #be123c;
             padding-top: 10px;
             margin-top: 10px;
             font-size: 16px;
@@ -228,10 +228,10 @@
 <body>
     <!-- Header -->
     <div class="header">
-        <div class="company-name">Nama Perusahaan Anda</div>
+        <div class="company-name">LlaFlorist Kediri</div>
         <div class="company-info">
-            Jl. Contoh Alamat No. 123, Kediri, Jawa Timur<br>
-            Email: info@perusahaan.com | Telp: (0354) 1234567
+            Jl. Selomangleng, Pojok, Kec.Mojoroto Kota Kediri, Jawa Timur 64114<br>
+            Email: llaflorist@gmail.com | Telp: 085808933346
         </div>
         
         <div class="invoice-title">
@@ -308,7 +308,7 @@
                 </div>
                 <div class="info-row">
                     <span class="info-label">Total:</span>
-                    <span class="info-value" style="font-size: 14px; color: #2563eb; font-weight: bold;">
+                    <span class="info-value" style="font-size: 14px; color: #b3294b; font-weight: bold;">
                         Rp {{ number_format($order->total_amount, 0, ',', '.') }}
                     </span>
                 </div>
@@ -317,7 +317,7 @@
     </div>
 
     <!-- Order Items Table -->
-    <h3 style="margin-bottom: 15px; color: #2563eb; font-size: 14px;">Daftar Pesanan</h3>
+    <h3 style="margin-bottom: 15px; color: #eb2525a0; font-size: 14px;">Daftar Pesanan</h3>
     <table class="items-table">
         <thead>
             <tr>
