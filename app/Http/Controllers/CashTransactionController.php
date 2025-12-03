@@ -3,16 +3,28 @@
 namespace App\Http\Controllers;
 
 use App\Models\CashTransaction;
+use App\Services\CashTransactionService;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class CashTransactionController extends Controller
 {
+    private $cashTransactionService;
+
+    public function __construct(CashTransactionService $cashTransactionService) {
+        $this->cashTransactionService = $cashTransactionService;
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $cashTransactions = $this->cashTransactionService->getAll();
+
+        return Inertia::render('admin/cash_transactions/index/page', [
+            'cashTransactions' => $cashTransactions
+        ]);
     }
 
     /**

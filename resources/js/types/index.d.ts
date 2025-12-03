@@ -66,6 +66,16 @@ export interface TimeStamp {
     updated_at: Date;
 }
 
+export interface CashTransaction extends TimeStamp {
+    id: number;
+    order_id?: number | null;
+    type: 'income' | 'expense';
+    category: string;
+    amount: number;
+    transaction_date: Date;
+    description: string;
+}
+
 export interface Auth {
     user: User;
 }

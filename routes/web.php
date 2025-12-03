@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CashTransactionController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\OrderController;
@@ -40,6 +41,8 @@ Route::middleware(['auth', 'verified'])->prefix("/admin")->group(function () {
     Route::patch('update-status/{id}', [OrderController::class, 'updateStatus'])->name('orders.updateStatus');
 
     Route::resource('schedules', ScheduleController::class);
+
+    Route::resource('cash-transactions', CashTransactionController::class);
 });
 
 Route::name('user.')->group(function() {
