@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('category', 25);
             $table->integer('amount');
             $table->dateTime('transaction_date');
-            $table->text('description');
+            $table->text('description')->nullable();
 
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
             $table->timestamps();
