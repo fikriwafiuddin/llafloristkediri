@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { formatCurrency, formatDate } from '@/lib/utils';
+import { edit } from '@/routes/cash-transactions';
 import { CashTransaction } from '@/types';
 import { Link } from '@inertiajs/react';
 import { ColumnDef } from '@tanstack/react-table';
@@ -44,9 +45,7 @@ const columns: ColumnDef<CashTransaction>[] = [
                         <Button variant="outline">
                             <EyeIcon />
                         </Button>
-                        <Link
-                            href={`/admin/orders/${cashTransaction.order_id}`}
-                        >
+                        <Link href={edit(cashTransaction.id)}>
                             <Button>
                                 <EditIcon />
                             </Button>
