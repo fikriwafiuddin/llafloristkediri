@@ -32,7 +32,7 @@ class CashTransactionController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('admin/cash_transactions/create/page');
     }
 
     /**
