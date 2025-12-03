@@ -13,10 +13,16 @@ const columns: ColumnDef<CashTransaction>[] = [
     {
         accessorKey: 'type',
         header: 'Tipe',
+        cell: ({ row }) =>
+            row.getValue('type') === 'income' ? 'Pemasukan' : 'Pengeluaran',
     },
     {
         accessorKey: 'category',
         header: 'Kategori',
+        cell: ({ row }) =>
+            (row.getValue('category') as string).toLocaleLowerCase() == 'order'
+                ? 'Pesanan'
+                : row.getValue('category'),
     },
     {
         accessorKey: 'amount',
@@ -32,7 +38,7 @@ const columns: ColumnDef<CashTransaction>[] = [
         header: 'Aksi',
         cell: ({ row }) => {
             const cashTransaction = row.original;
-            if (cashTransaction.order_id) {
+            if (!cashTransaction.order_id) {
                 return (
                     <div className="flex gap-2">
                         <Button variant="outline">
@@ -41,7 +47,9 @@ const columns: ColumnDef<CashTransaction>[] = [
                         <Link
                             href={`/admin/orders/${cashTransaction.order_id}`}
                         >
-                            <EditIcon />
+                            <Button>
+                                <EditIcon />
+                            </Button>
                         </Link>
                         <Button variant="destructive">
                             <TrashIcon />

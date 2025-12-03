@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CashTransactions\CashTransactionRequest;
 use App\Models\CashTransaction;
 use App\Services\CashTransactionService;
 use Illuminate\Http\Request;
@@ -38,9 +39,11 @@ class CashTransactionController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CashTransactionRequest $request)
     {
-        //
+        $this->cashTransactionService->create($request->validated());
+
+        return to_route('cash-transactions.index')->with('success', 'Transaksi kas berhasil ditambahkan');
     }
 
     /**
