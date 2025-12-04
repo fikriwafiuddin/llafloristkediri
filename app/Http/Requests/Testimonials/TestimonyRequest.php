@@ -24,6 +24,7 @@ class TestimonyRequest extends FormRequest
         return [
             'customer_name' => 'required|string|min:3|max:25',
             'rating' => 'required|integer|between:1,5',
+            'customer_status' => 'required|string|min:3|max:25',
             'review' => 'required|string|min:5|max:300'
         ];
     }
@@ -43,6 +44,10 @@ class TestimonyRequest extends FormRequest
             'rating.required' => 'Kolom rating harus diisi.',
             'rating.integer' => 'Kolom rating harus berupa bilangan bulat.',
             'rating.between' => 'Kolom rating harus diisi diantara 1 sampai 5.',
+            'customer_status.required' => 'Kolom status pelanggan harus diisi.',
+            'customer_status.string' => 'Kolom status pelanggan harus berupa string.',
+            'customer_status.min' => 'Kolom status pelanggan harus minimal 3 karakter.',
+            'customer_status.max' => 'Kolom status pelanggan tidak boleh lebih dari 25 karakter.',
             'review.required' => 'Kolom ulasan harus diisi.',
             'review.string' => 'Kolom ulasan harus berupa string.',
             'review.min' => 'Kolom ulasan harus minimal 5 karakter.',
