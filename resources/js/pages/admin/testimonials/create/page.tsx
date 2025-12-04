@@ -34,7 +34,7 @@ function TestimonialsCreatePage() {
 
                 <Card>
                     <CardHeader>
-                        <CardTitle>Form Testmoni</CardTitle>
+                        <CardTitle>Form Testimoni</CardTitle>
                     </CardHeader>
                     <CardContent className="space-y-4">
                         <FormTestimony />

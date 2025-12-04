@@ -38,7 +38,7 @@ function TestimonialsUpdatePage({ testimony }: TestimonialsUpdatePageProps) {
 
                 <Card>
                     <CardHeader>
-                        <CardTitle>Form Update Testmoni</CardTitle>
+                        <CardTitle>Form Update Testimoni</CardTitle>
                     </CardHeader>
                     <CardContent className="space-y-4">
                         <FormTestimony testimony={testimony} />

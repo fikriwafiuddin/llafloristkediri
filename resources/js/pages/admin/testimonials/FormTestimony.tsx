@@ -20,7 +20,7 @@ type FormTestimonyProps = {
 };
 
 function FormTestimony({ testimony }: FormTestimonyProps) {
-    const { data, submit, setData, processing, errors } = useForm({
+    const { data, submit, setData, processing, errors, isDirty } = useForm({
         customer_name: testimony?.customer_name || '',
         rating: testimony?.rating.toString() || '1',
         customer_status: testimony?.customer_status || '',
@@ -158,7 +158,7 @@ function FormTestimony({ testimony }: FormTestimonyProps) {
                     )}
                 </div>
 
-                <Button type="submit">
+                <Button type="submit" disabled={processing || !isDirty}>
                     {processing ? <Spinner /> : 'Simpan'}
                 </Button>
             </div>
