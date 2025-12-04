@@ -33,6 +33,7 @@ export interface Material {
     name: string;
     price: number;
     stock: number;
+    unit: string;
 }
 
 export interface Order extends TimeStamp {
