@@ -21,6 +21,10 @@ class CashTransactionService
     {
         $cashTransaction = $this->getById($id);
 
+        if (!empty($cashTransaction->order_id)) {
+            throw new \Exception('Transaksi kas yang terhubung dengan pesanan tidak dapat diupdate.');
+        }
+
         $transactionDate = Carbon::parse($data['transaction_date'])
                 ->setTimezone('Asia/Jakarta')
                 ->format('Y-m-d H:i:s');

@@ -7,6 +7,7 @@ use App\Models\CashTransaction;
 use App\Services\CashTransactionService;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use PhpParser\Node\Stmt\TryCatch;
 
 class CashTransactionController extends Controller
 {
@@ -71,9 +72,13 @@ class CashTransactionController extends Controller
      */
     public function update(CashTransactionRequest $request, int $id)
     {
-        $this->cashTransactionService->update($request->validated(), $id);
+        try {
+            $this->cashTransactionService->update($request->validated(), $id);
 
-        return to_route('cash-transactions.index')->with('success', 'Transaksi kas berhasil dihapus');
+            return to_route('cash-transactions.index')->with('success', 'Transaksi kas berhasil diupdate');
+        } catch (\Exception $e) {
+            return to_route('cash-transactions.index')->with('error', $e->getMessage());
+        }
     }
 
     /**
