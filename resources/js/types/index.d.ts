@@ -23,6 +23,7 @@ export interface Testimony {
     id: number;
     customer_name: string;
     rating: number;
+    customer_status: string;
     review: string;
     created_at: Date;
 }

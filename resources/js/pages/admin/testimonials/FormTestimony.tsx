@@ -23,6 +23,7 @@ function FormTestimony({ testimony }: FormTestimonyProps) {
     const { data, submit, setData, processing, errors } = useForm({
         customer_name: testimony?.customer_name || '',
         rating: testimony?.rating.toString() || '1',
+        customer_status: testimony?.customer_status || '',
         review: testimony?.review || '',
     });
 
@@ -104,6 +105,37 @@ function FormTestimony({ testimony }: FormTestimonyProps) {
                             </span>
                         )}
                     </div>
+                </div>
+
+                <div>
+                    <Label
+                        htmlFor="customer_status"
+                        className={
+                            errors.customer_status ? 'text-destructive' : ''
+                        }
+                    >
+                        Status Pelanggan
+                    </Label>
+                    <Input
+                        name="customer_status"
+                        id="customer_status"
+                        type="text"
+                        value={data.customer_status}
+                        onChange={(e) =>
+                            setData('customer_status', e.target.value)
+                        }
+                        className={
+                            errors.customer_status
+                                ? 'border-destructive focus-visible:ring-destructive'
+                                : ''
+                        }
+                        placeholder="Masukkan status pelanggan"
+                    />
+                    {errors.customer_status && (
+                        <span className="text-sm text-destructive">
+                            {errors.customer_status}
+                        </span>
+                    )}
                 </div>
 
                 <div>
