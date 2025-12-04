@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { formatCurrency, formatDate } from '@/lib/utils';
-import { edit } from '@/routes/cash-transactions';
+import { edit, show } from '@/routes/cash-transactions';
 import { CashTransaction } from '@/types';
 import { Link } from '@inertiajs/react';
 import { ColumnDef } from '@tanstack/react-table';
@@ -43,9 +43,11 @@ const columns: ColumnDef<CashTransaction>[] = [
             if (!cashTransaction.order_id) {
                 return (
                     <div className="flex gap-2">
-                        <Button variant="outline">
-                            <EyeIcon />
-                        </Button>
+                        <Link href={show(cashTransaction.id)}>
+                            <Button variant="outline">
+                                <EyeIcon />
+                            </Button>
+                        </Link>
                         <Link href={edit(cashTransaction.id)}>
                             <Button>
                                 <EditIcon />

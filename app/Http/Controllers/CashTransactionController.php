@@ -50,9 +50,13 @@ class CashTransactionController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(CashTransaction $cashTransaction)
+    public function show(int $id)
     {
-        //
+        $cashTransaction = $this->cashTransactionService->getById($id);
+
+        return Inertia::render('admin/cash_transactions/show/page', [
+            'cashTransaction' => $cashTransaction
+        ]);
     }
 
     /**
