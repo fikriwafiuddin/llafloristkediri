@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\OrderItem;
+use App\Models\CashTransaction;
 
 class Order extends Model
 {
@@ -22,5 +23,10 @@ class Order extends Model
     public function orderItems()
     {
         return $this->hasMany(OrderItem::class);
+    }
+
+    public function cashTransaction()
+    {
+        return $this->hasOne(CashTransaction::class);
     }
 }

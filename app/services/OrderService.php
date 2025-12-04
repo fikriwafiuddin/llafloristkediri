@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Product;
+use App\Models\CashTransaction;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
@@ -62,21 +63,53 @@ class OrderService
                 'total_amount' => $totalAmount,
             ]);
 
+            if ($data['is_paid']) {
+                CashTransaction::create([
+                    'order_id' => $order->id,
+                    'type' => 'income',
+                    'category' => 'Pesanan',
+                    'amount' => $totalAmount,
+                    'transaction_date' => $schedule,
+                    'description' => "Pembayaran pesanan dari {$data['customer_name']}"
+                ]);
+            }
+
             return $order;
         });
     }
 
     public function update(array $data, int $id)
     {
-        $schedule = Carbon::parse($data['schedule'])
-                ->setTimezone('Asia/Jakarta')
-                ->format('Y-m-d H:i:s');
-        
-        $data['schedule'] = $schedule;
+        return DB::transaction(function () use ($data, $id) {
+            $order = $this->getById($id);
+            
+            $schedule = Carbon::parse($data['schedule'])
+                    ->setTimezone('Asia/Jakarta')
+                    ->format('Y-m-d H:i:s');
+            
+            $data['schedule'] = $schedule;
+            
+            $wasPaid = $order->is_paid;
+            $isPaid = $data['is_paid'];
+            
+            $order->update($data);
 
-        $order = $this->getById($id);
+            if (!$wasPaid && $isPaid) {
+                CashTransaction::create([
+                    'order_id' => $order->id,
+                    'type' => 'income',
+                    'category' => 'Pesanan',
+                    'amount' => $order->total_amount,
+                    'transaction_date' => $schedule,
+                    'description' => "Pembayaran pesanan dari {$order->customer_name}"
+                ]);
+            }
+            elseif ($wasPaid && !$isPaid) {
+                CashTransaction::where('order_id', $order->id)->delete();
+            }
 
-        return $order->update($data);
+            return $order;
+        });
     }
 
     public function updateStatus (array $data, int $id)

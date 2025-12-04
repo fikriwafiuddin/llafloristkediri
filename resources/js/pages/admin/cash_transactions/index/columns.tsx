@@ -1,3 +1,4 @@
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { formatCurrency, formatDate } from '@/lib/utils';
 import { edit, show } from '@/routes/cash-transactions';
@@ -16,7 +17,11 @@ const columns: ColumnDef<CashTransaction>[] = [
         accessorKey: 'type',
         header: 'Tipe',
         cell: ({ row }) =>
-            row.getValue('type') === 'income' ? 'Pemasukan' : 'Pengeluaran',
+            row.getValue('type') === 'income' ? (
+                <Badge variant="success">Pemasukan</Badge>
+            ) : (
+                <Badge variant="destructive">Pengeluaran</Badge>
+            ),
     },
     {
         accessorKey: 'category',
