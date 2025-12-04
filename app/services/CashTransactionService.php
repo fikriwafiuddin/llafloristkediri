@@ -16,6 +16,17 @@ class CashTransactionService
         return CashTransaction::create([...$data, 'transaction_date' => $transactionDate]);
     }
 
+    public function update(array $data, int $id)
+    {
+        $cashTransaction = $this->getById($id);
+
+        $transactionDate = Carbon::parse($data['transaction_date'])
+                ->setTimezone('Asia/Jakarta')
+                ->format('Y-m-d H:i:s');
+        
+        return $cashTransaction->update([...$data, 'transaction_date' => $transactionDate]);
+    }
+
     public function getAll()
     {
         $cashTransactions = CashTransaction::query()->paginate(10);

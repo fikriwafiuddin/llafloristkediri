@@ -69,9 +69,11 @@ class CashTransactionController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, CashTransaction $cashTransaction)
+    public function update(CashTransactionRequest $request, int $id)
     {
-        //
+        $this->cashTransactionService->update($request->validated(), $id);
+
+        return to_route('cash-transactions.index')->with('success', 'Transaksi kas berhasil dihapus');
     }
 
     /**

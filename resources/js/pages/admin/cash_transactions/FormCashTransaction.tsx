@@ -13,7 +13,7 @@ import {
 } from '@/components/ui/select';
 import { Spinner } from '@/components/ui/spinner';
 import { Textarea } from '@/components/ui/textarea';
-import { store } from '@/routes/cash-transactions';
+import { store, update } from '@/routes/cash-transactions';
 import { CashTransaction } from '@/types';
 import { useForm } from '@inertiajs/react';
 import { format } from 'date-fns';
@@ -36,7 +36,11 @@ function FormCashTransaction({ cashTransaction }: FormCashTransactionProps) {
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        submit(store());
+        if (cashTransaction) {
+            submit(update(cashTransaction.id));
+        } else {
+            submit(store());
+        }
     };
     return (
         <form onSubmit={handleSubmit}>
