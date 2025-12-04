@@ -1,11 +1,13 @@
 import AppPagination from '@/components/app-pagination';
 import { DataTable } from '@/components/data-table';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import AppLayout from '@/layouts/app-layout';
 import { create, index } from '@/routes/cash-transactions';
 import { BreadcrumbItem, CashTransaction } from '@/types';
-import { Head, Link } from '@inertiajs/react';
+import { Head, Link, usePage } from '@inertiajs/react';
+import { AlertCircleIcon, CheckCircleIcon } from 'lucide-react';
 import columns from './columns';
 
 const breadcrumbs: BreadcrumbItem[] = [
@@ -30,6 +32,9 @@ type CashTransactionIndexPageProps = {
 function CashTransactionIndexPage({
     cashTransactions,
 }: CashTransactionIndexPageProps) {
+    const { flash } = usePage<{ flash: { success: string; error: string } }>()
+        .props;
+
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Pesanan" />
@@ -40,6 +45,22 @@ function CashTransactionIndexPage({
                         <Button>+ Tambah Transaksi Kas</Button>
                     </Link>
                 </div>
+
+                {flash.success && (
+                    <Alert>
+                        <CheckCircleIcon />
+                        <AlertTitle>Success</AlertTitle>
+                        <AlertDescription>{flash.success}</AlertDescription>
+                    </Alert>
+                )}
+
+                {flash.error && (
+                    <Alert variant="destructive">
+                        <AlertCircleIcon />
+                        <AlertTitle>Error</AlertTitle>
+                        <AlertDescription>{flash.error}</AlertDescription>
+                    </Alert>
+                )}
 
                 <Card>
                     <CardHeader>
