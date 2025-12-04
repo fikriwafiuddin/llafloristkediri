@@ -1,5 +1,6 @@
 import RatingStarts from '@/components/rating-starts';
 import { Button } from '@/components/ui/button';
+import { formatDate } from '@/lib/utils';
 import { edit } from '@/routes/testimonials';
 import { Testimony } from '@/types';
 import { Link } from '@inertiajs/react';
@@ -14,6 +15,10 @@ const columns: ColumnDef<Testimony>[] = [
         header: 'Nama Pelanggan',
     },
     {
+        accessorKey: 'customer_status',
+        header: 'Status Pelanggan',
+    },
+    {
         accessorKey: 'rating',
         header: 'Rating',
         cell: ({ row }) => {
@@ -24,8 +29,7 @@ const columns: ColumnDef<Testimony>[] = [
     {
         accessorKey: 'created_at',
         header: 'Dibuat',
-        cell: ({ row }) =>
-            new Date(row.getValue('created_at')).toLocaleString('id'),
+        cell: ({ row }) => formatDate(row.getValue('created_at')),
     },
     {
         header: 'Aksi',

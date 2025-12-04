@@ -10,6 +10,7 @@ import {
     DialogTitle,
     DialogTrigger,
 } from '@/components/ui/dialog';
+import { formatDate } from '@/lib/utils';
 import { Testimony } from '@/types';
 import { EyeIcon } from 'lucide-react';
 
@@ -21,7 +22,7 @@ function DetailTestimony({ testimony }: DetailTestimonyProps) {
     return (
         <Dialog>
             <DialogTrigger asChild>
-                <Button>
+                <Button variant="outline">
                     <EyeIcon />
                 </Button>
             </DialogTrigger>
@@ -37,6 +38,10 @@ function DetailTestimony({ testimony }: DetailTestimonyProps) {
                         <p className="font-semibold">Nama Pelanggan:</p>
                         <p>{testimony.customer_name}</p>
                     </div>
+                    <div>
+                        <p className="font-semibold">Status Pelanggan:</p>
+                        <p>{testimony.customer_status}</p>
+                    </div>
 
                     <div>
                         <p className="font-semibold">Rating:</p>
@@ -45,11 +50,7 @@ function DetailTestimony({ testimony }: DetailTestimonyProps) {
 
                     <div>
                         <p className="font-semibold">Dibuat:</p>
-                        <p>
-                            {new Date(testimony.created_at).toLocaleString(
-                                'id',
-                            )}
-                        </p>
+                        <p>{formatDate(testimony.created_at)}</p>
                     </div>
 
                     <div>

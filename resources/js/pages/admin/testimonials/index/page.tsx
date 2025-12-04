@@ -53,7 +53,7 @@ function TestimonialsIndexPage({ testimonials }: TestimonialsIndexPageProps) {
 
                 <Card>
                     <CardHeader>
-                        <CardTitle>List Testmoni</CardTitle>
+                        <CardTitle>List Testimoni</CardTitle>
                     </CardHeader>
                     <CardContent className="space-y-4">
                         <DataTable columns={columns} data={testimonials.data} />
