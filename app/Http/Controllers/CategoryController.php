@@ -44,7 +44,7 @@ class CategoryController extends Controller
     {
         $this->categoryService->create($request->validated());
         
-        return to_route('categories.index');
+        return to_route('categories.index')->with('success', 'Kategori berhasil disimpan');
     }
 
     /**
@@ -74,7 +74,7 @@ class CategoryController extends Controller
     {
         $this->categoryService->update($request->validated(), $id);
 
-        return to_route('categories.index');
+        return to_route('categories.index')->with('success', 'Kategori berhasil diupdate');
     }
 
     /**
@@ -84,6 +84,6 @@ class CategoryController extends Controller
     {
         $this->categoryService->destroy($id);
 
-        return to_route('categories.index');
+        return to_route('categories.index')->with('success', 'Kategori berhasil dihapus');
     }
 }
