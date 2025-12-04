@@ -20,12 +20,13 @@ class CashTransactionController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $cashTransactions = $this->cashTransactionService->getAll();
+        $cashTransactions = $this->cashTransactionService->getAll($request);
 
         return Inertia::render('admin/cash_transactions/index/page', [
-            'cashTransactions' => $cashTransactions
+            'cashTransactions' => $cashTransactions,
+            'filters' => $request->only(['year', 'month', 'type'])
         ]);
     }
 

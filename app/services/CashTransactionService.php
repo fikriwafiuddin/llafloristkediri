@@ -43,9 +43,20 @@ class CashTransactionService
         return $cashTransaction->delete();
     }
 
-    public function getAll()
+    public function getAll(object $request)
     {
-        $cashTransactions = CashTransaction::query()->paginate(10);
+        $year = $request->year ?? Carbon::now()->year;
+        $month = $request->month ?? Carbon::now()->month;
+
+        $cashTransactions = CashTransaction::query()
+                                    ->whereYear('transaction_date', $year)
+                                    ->whereMonth('transaction_date', $month)
+                                    ->when($request->type !== 'all', function ($query) use ($request) {
+                                        if (!empty($request->type)) {
+                                            $query->where('type', strtolower($request->type));
+                                        }
+                                    })
+                                    ->paginate(10);
 
         return $cashTransactions;
     }

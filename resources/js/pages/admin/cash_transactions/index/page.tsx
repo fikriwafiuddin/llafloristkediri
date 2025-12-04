@@ -9,6 +9,7 @@ import { BreadcrumbItem, CashTransaction } from '@/types';
 import { Head, Link, usePage } from '@inertiajs/react';
 import { AlertCircleIcon, CheckCircleIcon } from 'lucide-react';
 import columns from './columns';
+import FiltersSection from './FiltersSection';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -27,10 +28,16 @@ type CashTransactionIndexPageProps = {
         }[];
         current_page: number;
     };
+    filters: {
+        year: string;
+        month: string;
+        type: string;
+    };
 };
 
 function CashTransactionIndexPage({
     cashTransactions,
+    filters,
 }: CashTransactionIndexPageProps) {
     const { flash } = usePage<{ flash: { success: string; error: string } }>()
         .props;
@@ -67,6 +74,7 @@ function CashTransactionIndexPage({
                         <CardTitle>List Transaksi Kas</CardTitle>
                     </CardHeader>
                     <CardContent className="space-y-4">
+                        <FiltersSection filters={filters} />
                         <DataTable
                             columns={columns}
                             data={cashTransactions.data}
