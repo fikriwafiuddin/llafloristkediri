@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\CashTransaction;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class CashTransactionService
 {
@@ -25,6 +26,17 @@ class CashTransactionService
                 ->format('Y-m-d H:i:s');
         
         return $cashTransaction->update([...$data, 'transaction_date' => $transactionDate]);
+    }
+
+    public function delete(int $id)
+    {
+        $cashTransaction = $this->getById($id);
+
+        if (!empty($cashTransaction->order_id)) {
+            throw new \Exception('Transaksi kas yang terhubung dengan pesanan tidak dapat dihapus.');
+        }
+
+        return $cashTransaction->delete();
     }
 
     public function getAll()

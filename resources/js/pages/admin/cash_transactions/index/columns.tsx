@@ -4,7 +4,8 @@ import { edit } from '@/routes/cash-transactions';
 import { CashTransaction } from '@/types';
 import { Link } from '@inertiajs/react';
 import { ColumnDef } from '@tanstack/react-table';
-import { EditIcon, EyeIcon, TrashIcon } from 'lucide-react';
+import { EditIcon, EyeIcon } from 'lucide-react';
+import DeleteCashTransaction from '../DeleteCashTransaction';
 
 const columns: ColumnDef<CashTransaction>[] = [
     {
@@ -50,9 +51,7 @@ const columns: ColumnDef<CashTransaction>[] = [
                                 <EditIcon />
                             </Button>
                         </Link>
-                        <Button variant="destructive">
-                            <TrashIcon />
-                        </Button>
+                        <DeleteCashTransaction id={cashTransaction.id} />
                     </div>
                 );
             }

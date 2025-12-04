@@ -79,8 +79,14 @@ class CashTransactionController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(CashTransaction $cashTransaction)
+    public function destroy(int $id)
     {
-        //
+        try {
+            $this->cashTransactionService->delete($id);
+
+            return to_route('cash-transactions.index')->with('success', 'Transaksi kas berhasil dihapus');
+        } catch (\Exception $e) {
+            return to_route('cash-transactions.index')->with('error', $e->getMessage());
+        }
     }
 }
