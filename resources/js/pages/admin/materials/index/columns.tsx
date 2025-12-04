@@ -1,4 +1,5 @@
 import { Button } from '@/components/ui/button';
+import { formatCurrency } from '@/lib/utils';
 import { edit } from '@/routes/materials';
 import { Material } from '@/types';
 import { Link } from '@inertiajs/react';
@@ -18,13 +19,16 @@ const columns: ColumnDef<Material>[] = [
     {
         accessorKey: 'price',
         header: 'Harga',
-        cell: ({ row }) =>
-            `Rp ${(row.getValue('price') as number).toLocaleString()}`,
+        cell: ({ row }) => formatCurrency(row.getValue('price')),
     },
     {
         accessorKey: 'stock',
         header: 'Stok',
         cell: ({ row }) => (row.getValue('stock') as number).toLocaleString(),
+    },
+    {
+        accessorKey: 'unit',
+        header: 'Unit',
     },
     {
         header: 'Aksi',
