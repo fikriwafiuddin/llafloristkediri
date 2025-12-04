@@ -24,7 +24,8 @@ class MaterialRequest extends FormRequest
         return [
             'name' => 'required|string|min:3|max:25',
             'price' => 'required|numeric|min:1',
-            'stock' => 'required|integer|min:0'
+            'stock' => 'required|integer|min:0',
+            'unit' => 'required|string|min:1|max:10'
         ];
     }
 
@@ -45,7 +46,11 @@ class MaterialRequest extends FormRequest
             'price.min' => 'Kolom harga harus berupa angka positif.',
             'stock.required' => 'Kolom stok harus diisi.',
             'stock.integer' => 'Kolom stok harus berupa bilangan bulat.',
-            'stock.min' => 'Kolom stok tidak boleh kurang dari 0.'
+            'stock.min' => 'Kolom stok tidak boleh kurang dari 0.',
+            'unit.required' => 'Kolom unit harus diisi.',
+            'unit.string' => 'Kolom unit harus berupa string.',
+            'unit.min' => 'Kolom unit harus minimal 1 karakter.',
+            'unit.max' => 'Kolom unit tidak boleh lebih dari 10 karakter.'
         ];
     }
 }
