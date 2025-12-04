@@ -28,6 +28,7 @@ import {
     Folder,
     FolderIcon,
     LayoutGrid,
+    NotebookIcon,
     StarIcon,
     TouchpadIcon,
 } from 'lucide-react';
@@ -77,7 +78,7 @@ const mainNavItems: NavItem[] = [
     {
         title: 'Kas',
         href: cashTransactions.index(),
-        icon: BookOpen,
+        icon: NotebookIcon,
     },
 ];
 
