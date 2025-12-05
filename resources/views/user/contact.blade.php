@@ -8,7 +8,7 @@
         <p class="text-gray-500">Kami siap membantu mewujudkan momen spesialmu</p>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-6xl mx-auto">
+    <div class="grid grid-cols-1 max-w-lg mx-auto">
         
         <div class="bg-white p-8 rounded-xl shadow-sm border border-pink-100">
             <h2 class="text-xl font-semibold text-pink-600 mb-6">Informasi Toko</h2>
@@ -60,33 +60,23 @@
                         </p>
                     </div>
                 </div>
+                <div class="flex items-start gap-4">
+                    <div class="bg-pink-100 p-3 rounded-full text-pink-600">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M11.968 2.016l1.233 3.697h4.037L15 11.968l-1.233 3.697h-4.037zM12 21a9 9 0 100-18 9 9 0 000 18z"/>
+                            <circle cx="12" cy="12" r="3"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-gray-700">Instagram</h3>
+                        <a href="https://www.instagram.com/ellasantaossa" target="_blank" class="text-pink-500 text-sm font-semibold hover:underline mt-1 block">
+                            @ellasantaossa &rarr;
+                        </a>
+                    </div>
+                </div>
+                </div>
             </div>
         </div>
-
-        <div class="bg-white p-8 rounded-xl shadow-sm border border-gray-100">
-            <h2 class="text-xl font-semibold text-gray-800 mb-6">Kirim Pesan</h2>
-            <form action="#" method="POST"> 
-                @csrf
-                <div class="space-y-4">
-                    <div>
-                        <label class="block text-gray-700 text-sm font-bold mb-2">Nama Lengkap</label>
-                        <input type="text" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-300" placeholder="Nama Anda">
-                    </div>
-                    <div>
-                        <label class="block text-gray-700 text-sm font-bold mb-2">Email</label>
-                        <input type="email" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-300" placeholder="email@contoh.com">
-                    </div>
-                    <div>
-                        <label class="block text-gray-700 text-sm font-bold mb-2">Pesan</label>
-                        <textarea class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-300 h-32" placeholder="Tulis pertanyaan atau pesanan Anda..."></textarea>
-                    </div>
-                    <x-button type="button">
-                        Kirim Pesan
-                    </x-button>
-                </div>
-            </form>
-        </div>
-
     </div>
 </div>
 @endsection
