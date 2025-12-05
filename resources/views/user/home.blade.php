@@ -26,7 +26,8 @@
                             Belanja Sekarang
                         </x-button>
                     </a>
-                    <a href="">
+                    <a href="https://wa.me/6285808933346?text=Halo%20kak,%20saya%20ingin%20pesan%20bunga%20custom."
+                        target="_blank"
                         <x-button variant="success">
                             <svg
                                 class="size-7 inline"
