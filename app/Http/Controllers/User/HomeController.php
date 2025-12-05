@@ -28,4 +28,13 @@ class HomeController extends Controller
             'testimonials' => $testimonials
         ]);
     }
+
+    public function testimonials()
+    {
+        $testimonials = $this->testimonyService->getAll();
+
+        return view('user.testimoni', [
+            'testimonials' => $testimonials
+        ]);
+    }
 }
