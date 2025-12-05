@@ -47,7 +47,14 @@
                     Detail
                 </x-button>
             </a>
-            <a href="">
+@php
+    $whatsappNumber = '6285808933346'; 
+    $formattedPrice = 'Rp ' . Number::format($price, locale: 'id');
+    $message = "Halo, saya ingin memesan produk:\n\n*Nama Produk:* {$name}\n*Harga:* {$formattedPrice}";
+    $encodedMessage = urlencode($message);
+    $whatsappUrl = "https://wa.me/{$whatsappNumber}?text={$encodedMessage}";
+@endphp
+            <a href="{{ $whatsappUrl }}" target="_blank">
                 <x-button
                     variant="success"
                     class="w-full"
