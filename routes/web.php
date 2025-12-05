@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CashTransactionController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
@@ -24,9 +25,7 @@ use Laravel\Fortify\Features;
 Route::get('/orders/{id}/pdf/stream', [OrderController::class, 'streamPdf'])->name('orders.pdf.stream');
 
 Route::middleware(['auth', 'verified'])->prefix("/admin")->group(function () {
-    Route::get('dashboard', function () {
-        return Inertia::render('dashboard');
-    })->name('dashboard');
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
     
     Route::resource('categories', CategoryController::class);
 
