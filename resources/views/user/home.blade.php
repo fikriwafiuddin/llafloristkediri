@@ -180,26 +180,6 @@
         </div>
     </section>
 
-    {{-- Testimonilas Section --}}
-    <div class="relative py-16 px-8 bg-gradient-to-br from-pink-50 to-green-50 mb-20">
-        <div class="container mx-auto px-4 space-y-8">
-            <div>
-                <h1 class="text-center text-4xl font-playfair-display font-bold">Ulasan Pemesan</h1>
-                <p class="text-center">Beberapa ulasan dari beberapa orang yang telah memesan produk kami</p>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                @foreach ($testimonials as $testimony)
-                    <x-testimony-card
-                        :customer_name="$testimony['customer_name']"
-                        :rating="$testimony['rating']"
-                        :review="$testimony['review']"
-                    />
-                @endforeach
-            </div>
-        </div>
-    </div>
-
     {{-- CTAS Section --}}
     <section class="py-16 bg-gradient-to-r from-pink-100 to-green-100" data-testid="cta-section">
         <div class="container mx-auto px-4 text-center">
@@ -210,6 +190,27 @@
                 Tim kami siap membantu mewujudkan rangkaian bunga sesuai keinginan Anda. Hubungi kami untuk konsultasi gratis!
             </p>
             <x-button>Hubungi Kami</x-button>
+        </div>
+    </section>
+
+    {{-- Testimonilas Section --}}
+    <section class="py-16">
+        <div class="container mx-auto px-4 space-y-8">
+            <div>
+                <h1 class="text-center text-4xl font-playfair-display font-bold">Ulasan Pemesan</h1>
+                <p class="text-center">Beberapa ulasan dari beberapa orang yang telah memesan produk kami</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                @foreach ($testimonials as $testimony)
+                    <x-testimony-card
+                        :customer_name="$testimony['customer_name']"
+                        :customer_status="$testimony['customer_status']"
+                        :rating="$testimony['rating']"
+                        :review="$testimony['review']"
+                    />
+                @endforeach
+            </div>
         </div>
     </section>
 @endsection
