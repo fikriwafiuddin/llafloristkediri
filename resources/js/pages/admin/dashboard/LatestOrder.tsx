@@ -14,36 +14,13 @@ import {
     TableRow,
 } from '@/components/ui/table';
 import { formatCurrency } from '@/lib/utils';
+import { Order } from '@/types';
 
-const latestOrders = [
-    {
-        id: 1,
-        amount: 10000,
-        customer_name: 'Joko',
-    },
-    {
-        id: 1,
-        amount: 10000,
-        customer_name: 'Joko',
-    },
-    {
-        id: 1,
-        amount: 10000,
-        customer_name: 'Joko',
-    },
-    {
-        id: 1,
-        amount: 10000,
-        customer_name: 'Joko',
-    },
-    {
-        id: 1,
-        amount: 10000,
-        customer_name: 'Joko',
-    },
-];
+type LatestOrder = {
+    latestOrders: Order[];
+};
 
-function LatestOrder() {
+function LatestOrder({ latestOrders }: LatestOrder) {
     return (
         <Card>
             <CardHeader>
@@ -64,7 +41,7 @@ function LatestOrder() {
                             <TableRow key={order.id}>
                                 <TableCell>{index + 1}</TableCell>
                                 <TableCell>
-                                    {formatCurrency(order.amount)}
+                                    {formatCurrency(order.total_amount)}
                                 </TableCell>
                                 <TableCell>{order.customer_name}</TableCell>
                             </TableRow>

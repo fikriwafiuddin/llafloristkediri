@@ -256,4 +256,92 @@ class OrderService
             'cancelled' => $cancelledCount,
         ];
     }
+
+    public function getCountByDate(string $coll, ?string $date = null): int
+    {
+        if (empty($date)) {
+            $parsedDate = Carbon::now('Asia/Jakarta')->toDateString();
+        } else {
+            try {
+                $parsedDate = Carbon::parse($date)
+                    ->setTimezone('Asia/Jakarta')
+                    ->toDateString();
+            } catch (\Exception $e) {
+                $parsedDate = Carbon::now('Asia/Jakarta')->toDateString();
+            }
+        }
+
+        return Order::query()
+                    ->whereDate($coll, $parsedDate)
+                    ->count();
+    }
+
+    public function getCountByDateRange(string $startDate, string $endDate): int
+    {
+        $start = Carbon::parse($startDate)
+            ->setTimezone('Asia/Jakarta')
+            ->toDateString();
+
+        $end = Carbon::parse($endDate)
+            ->setTimezone('Asia/Jakarta')
+            ->toDateString();
+
+        return Order::query()
+                    ->whereBetween('schedule', [$start, $end])
+                    ->count();
+    }
+
+    public function getLatestOrders(int $limit = 5)
+    {
+        return Order::query()
+                    ->select('id', 'customer_name', 'total_amount')
+                    ->latest('created_at')
+                    ->limit($limit)
+                    ->get();
+    }
+
+    public function getOrdersChartData(int $days = 7): array
+    {
+        $startDate = Carbon::now('Asia/Jakarta')
+            ->subDays($days - 1)
+            ->startOfDay();
+        $endDate = Carbon::now('Asia/Jakarta')->endOfDay();
+
+        $orders = Order::query()
+            ->whereBetween('created_at', [$startDate, $endDate])
+            ->selectRaw("DATE(CONVERT_TZ(created_at, '+00:00', '+07:00')) as date")
+            ->selectRaw("COUNT(*) as order_count")
+            ->groupBy('date')
+            ->orderBy('date')
+            ->get()
+            ->toArray();
+
+        $result = [];
+        for ($i = $days - 1; $i >= 0; $i--) {
+            $date = Carbon::now('Asia/Jakarta')
+                ->subDays($i)
+                ->toDateString();
+            
+            $found = false;
+            foreach ($orders as $order) {
+                if ($order['date'] === $date) {
+                    $result[] = [
+                        'date' => $date,
+                        'order' => $order['order_count'],
+                    ];
+                    $found = true;
+                    break;
+                }
+            }
+
+            if (!$found) {
+                $result[] = [
+                    'date' => $date,
+                    'order' => 0,
+                ];
+            }
+        }
+
+        return $result;
+    }
 }

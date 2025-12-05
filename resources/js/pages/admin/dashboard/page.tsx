@@ -2,7 +2,7 @@ import StatCard from '@/components/stat-card';
 
 import AppLayout from '@/layouts/app-layout';
 import { dashboard } from '@/routes';
-import { type BreadcrumbItem } from '@/types';
+import { CashTransaction, Material, Order, type BreadcrumbItem } from '@/types';
 import { Head } from '@inertiajs/react';
 import {
     BanknoteIcon,
@@ -13,7 +13,10 @@ import {
 import LatestOrder from './LatestOrder';
 import LatestTransaction from './LatestTransaction';
 import OrderChart from './OrderChart';
+import OutOfStockMaterials from './OutOfStockMaterials';
+import TopProducts from './TopProducts';
 import TransactionChart from './TransactionChart';
+import { CashTransactionChartData, OrderChartData, TopProduct } from './types';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -22,7 +25,30 @@ const breadcrumbs: BreadcrumbItem[] = [
     },
 ];
 
-export default function Dashboard() {
+type DashboardProps = {
+    statistics: {
+        totalSchedules: number;
+        totalBalance: number;
+        totalProducts: number;
+        totalLatestOrders: number;
+    };
+    ordersChartData: OrderChartData[];
+    latestOrders: Order[];
+    transactionChartData: CashTransactionChartData[];
+    latestTransactions: CashTransaction[];
+    topProducts: TopProduct[];
+    outOfStockMaterials: Material[];
+};
+
+export default function Dashboard({
+    statistics,
+    ordersChartData,
+    latestOrders,
+    transactionChartData,
+    latestTransactions,
+    topProducts,
+    outOfStockMaterials,
+}: DashboardProps) {
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Dashboard" />
@@ -30,29 +56,38 @@ export default function Dashboard() {
                 <div className="grid gap-4 lg:grid-cols-4">
                     <StatCard
                         title="Jadwal hari ini"
-                        value={5}
+                        value={statistics.totalSchedules}
                         icon={CalendarDaysIcon}
                     />
                     <StatCard
                         title="Kas"
-                        value={1000000}
+                        value={statistics.totalBalance}
                         icon={BanknoteIcon}
                         isCurrency
                     />
                     <StatCard
                         title="Total Produk"
-                        value={20}
+                        value={statistics.totalProducts}
                         icon={FlowerIcon}
                     />
-                    <StatCard title="Pesanan Baru" value={5} icon={BookOpen} />
+                    <StatCard
+                        title="Pesanan Baru"
+                        value={statistics.totalLatestOrders}
+                        icon={BookOpen}
+                    />
                 </div>
 
                 <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
-                    <TransactionChart />
-                    <LatestTransaction />
+                    <TransactionChart chartData={transactionChartData} />
+                    <LatestTransaction latesTransactions={latestTransactions} />
 
-                    <OrderChart />
-                    <LatestOrder />
+                    <OrderChart chartData={ordersChartData} />
+                    <LatestOrder latestOrders={latestOrders} />
+                </div>
+
+                <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+                    <TopProducts topProducts={topProducts} />
+                    <OutOfStockMaterials materials={outOfStockMaterials} />
                 </div>
             </div>
         </AppLayout>

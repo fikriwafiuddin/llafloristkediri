@@ -6,42 +6,14 @@ import {
     CardTitle,
 } from '@/components/ui/card';
 import { formatCurrency, formatDate } from '@/lib/utils';
+import { CashTransaction } from '@/types';
 import { TrendingDown, TrendingUpIcon } from 'lucide-react';
 
-const latesTransactions = [
-    {
-        id: 1,
-        type: 'income',
-        amount: 30000,
-        transaction_date: new Date(),
-    },
-    {
-        id: 2,
-        type: 'expense',
-        amount: 45000,
-        transaction_date: new Date(),
-    },
-    {
-        id: 3,
-        type: 'income',
-        amount: 30000,
-        transaction_date: new Date(),
-    },
-    {
-        id: 4,
-        type: 'expense',
-        amount: 45000,
-        transaction_date: new Date(),
-    },
-    {
-        id: 5,
-        type: 'expense',
-        amount: 45000,
-        transaction_date: new Date(),
-    },
-];
+type LatestTransactionProps = {
+    latesTransactions: CashTransaction[];
+};
 
-function LatestTransaction() {
+function LatestTransaction({ latesTransactions }: LatestTransactionProps) {
     return (
         <Card>
             <CardHeader>

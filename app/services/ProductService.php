@@ -91,6 +91,11 @@ class ProductService
         return $query->limit($limit)->get();
     }
 
+    public function getCount()
+    {
+        return Product::count();
+    }
+
     private function uploadImage(UploadedFile $image)
     {
         return $image->store('products', 'public');

@@ -12,16 +12,8 @@ import {
     ChartTooltipContent,
 } from '@/components/ui/chart';
 import { Area, AreaChart, CartesianGrid, XAxis } from 'recharts';
+import { OrderChartData } from './types';
 
-const chartData = [
-    { date: '2024-04-01', order: 222 },
-    { date: '2024-04-02', order: 97 },
-    { date: '2024-04-03', order: 167 },
-    { date: '2024-04-04', order: 242 },
-    { date: '2024-04-05', order: 373 },
-    { date: '2024-04-06', order: 301 },
-    { date: '2024-04-07', order: 245 },
-];
 const chartConfig = {
     order: {
         label: 'Pesanan',
@@ -29,7 +21,11 @@ const chartConfig = {
     },
 } satisfies ChartConfig;
 
-function OrderChart() {
+type OrderChartProps = {
+    chartData: OrderChartData[];
+};
+
+function OrderChart({ chartData }: OrderChartProps) {
     return (
         <Card className="lg:col-span-2">
             <CardHeader>

@@ -39,4 +39,13 @@ class MaterialService
     {
         return Material::findOrFail($id);
     }
+
+    public function getOutOfStock(int $limit = 5)
+    {
+        $query = Material::query()
+                    ->where('stock', '<=', 0)
+                    ->orderBy('stock', 'asc');
+
+        return $query->limit($limit)->get();
+    }
 }

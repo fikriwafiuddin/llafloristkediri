@@ -12,16 +12,7 @@ import {
     ChartTooltipContent,
 } from '@/components/ui/chart';
 import { Bar, BarChart, CartesianGrid, XAxis } from 'recharts';
-
-const chartData = [
-    { day: 'Jumat', income: 186, expense: 80 },
-    { day: 'Sabtu', income: 305, expense: 200 },
-    { day: 'Minggu', income: 237, expense: 120 },
-    { day: 'Senin', income: 73, expense: 190 },
-    { day: 'Selasa', income: 209, expense: 130 },
-    { day: 'Rabu', income: 214, expense: 140 },
-    { day: 'Kamis', income: 214, expense: 140 },
-];
+import { CashTransactionChartData } from './types';
 
 const chartConfig = {
     income: {
@@ -34,7 +25,11 @@ const chartConfig = {
     },
 } satisfies ChartConfig;
 
-function TransactionChart() {
+type TransactionChartProps = {
+    chartData: CashTransactionChartData[];
+};
+
+function TransactionChart({ chartData }: TransactionChartProps) {
     return (
         <Card className="lg:col-span-2">
             <CardHeader>
