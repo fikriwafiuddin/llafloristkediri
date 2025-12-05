@@ -45,6 +45,7 @@ function DeleteCashTransaction({ id }: DeleteCashTransactionProps) {
                             <AlertDialogCancel>Batal</AlertDialogCancel>
                             <form onSubmit={handleSubmit}>
                                 <Button
+                                    className="w-full"
                                     variant="destructive"
                                     type="submit"
                                     disabled={processing}

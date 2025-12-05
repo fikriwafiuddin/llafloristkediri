@@ -1,4 +1,3 @@
-import { AlertTitle } from '@/components/ui/alert';
 import {
     AlertDialog,
     AlertDialogCancel,
@@ -6,6 +5,7 @@ import {
     AlertDialogDescription,
     AlertDialogFooter,
     AlertDialogHeader,
+    AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
 import { Button } from '@/components/ui/button';
 import { Spinner } from '@/components/ui/spinner';
@@ -35,7 +35,7 @@ function DeleteCategory({ id }: DeleteCategoryProps) {
             <AlertDialog open={openConfirm} onOpenChange={setOpenConfirm}>
                 <AlertDialogContent>
                     <AlertDialogHeader>
-                        <AlertTitle>Hapus Kategori</AlertTitle>
+                        <AlertDialogTitle>Hapus Kategori</AlertDialogTitle>
                         <AlertDialogDescription>
                             Apakah anda yakin untuk menghapus kategori ini?
                             Kategori tidak dapat dikembalikan lagi dan menghapus
@@ -46,6 +46,7 @@ function DeleteCategory({ id }: DeleteCategoryProps) {
                         <AlertDialogCancel>Batal</AlertDialogCancel>
                         <form onSubmit={handleSubmit}>
                             <Button
+                                className="w-full"
                                 variant="destructive"
                                 type="submit"
                                 disabled={processing}

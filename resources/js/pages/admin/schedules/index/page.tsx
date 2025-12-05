@@ -90,7 +90,7 @@ function ScheduleIndexPage({ schedules, statistics }: ScheduleIndexPageProps) {
                     onChange={(value) => setDate(value.toString())}
                 />
 
-                <div className="grid grid-cols-4 gap-4">
+                <div className="grid grid-cols-1 gap-4 lg:grid-cols-4">
                     <StatCard
                         title="Jadwal"
                         value={statistics.total}

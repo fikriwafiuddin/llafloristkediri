@@ -45,6 +45,7 @@ function DeleteOrder({ id }: DeleteOrderProps) {
                             <AlertDialogCancel>Batal</AlertDialogCancel>
                             <form onSubmit={handleSubmit}>
                                 <Button
+                                    className="w-full"
                                     variant="destructive"
                                     type="submit"
                                     disabled={processing}
