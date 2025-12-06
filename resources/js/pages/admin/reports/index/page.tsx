@@ -7,7 +7,7 @@ import {
     CardTitle,
 } from '@/components/ui/card';
 import AppLayout from '@/layouts/app-layout';
-import { index, order, product } from '@/routes/reports';
+import { cashTransaction, index, order, product } from '@/routes/reports';
 import { BreadcrumbItem } from '@/types';
 import { Head, Link } from '@inertiajs/react';
 import {
@@ -75,8 +75,10 @@ function ReportIndexPage() {
                                 <NotebookIcon className="size-16" />
                             </div>
                             <CardFooter>
-                                <Button size="sm" className="w-full">
-                                    Lihat detail <ArrowRightIcon />
+                                <Button size="sm" className="w-full" asChild>
+                                    <Link href={cashTransaction()}>
+                                        Lihat detail <ArrowRightIcon />
+                                    </Link>
                                 </Button>
                             </CardFooter>
                         </CardContent>

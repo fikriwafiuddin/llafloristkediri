@@ -47,6 +47,7 @@ Route::middleware(['auth', 'verified'])->prefix("/admin")->group(function () {
     Route::get('/reports', [ReportController::class, 'index'])->name('reports.index');
     Route::get('/reports/product', [ReportController::class, 'product'])->name('reports.product');
     Route::get('/reports/order', [ReportController::class, 'order'])->name('reports.order');
+    Route::get('/reports/cash-transaction', [ReportController::class, 'cashTransaction'])->name('reports.cashTransaction');
 });
 
 Route::name('user.')->group(function() {

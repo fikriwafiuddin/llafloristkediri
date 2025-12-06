@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\CashTransactionService;
 use App\Services\OrderItemService;
 use App\Services\OrderService;
 use Illuminate\Http\Request;
@@ -11,10 +12,16 @@ class ReportController extends Controller
 {
     private $orderItemService;
     private $orderService;
+    private $cashTransactionService;
 
-    public function __construct(OrderItemService $orderItemService, OrderService $orderService) {
+    public function __construct(
+        OrderItemService $orderItemService,
+        OrderService $orderService,
+        CashTransactionService $cashTransactionService
+    ) {
         $this->orderItemService = $orderItemService;
         $this->orderService = $orderService;
+        $this->cashTransactionService = $cashTransactionService;
     }
 
     public function index()
@@ -46,6 +53,18 @@ class ReportController extends Controller
             'orderChart' => $orderChart,
             'shippingMethodChart' => $shippingMethodChart,
             'paymentStatusChart' => $paymentStatusChart,
+            'filters' => $request->only(['year', 'month'])
+        ]);
+    }
+
+    public function cashTransaction(Request $request)
+    {
+        $summary = $this->cashTransactionService->getMonthlyCashTransactionSummary($request);
+        $cashTransactionChart = $this->cashTransactionService->getDailyCashflowStats($request);
+
+        return Inertia::render('admin/reports/cash_transaction/page', [
+            'summary' => $summary,
+            'cashTransactionChart' => $cashTransactionChart,
             'filters' => $request->only(['year', 'month'])
         ]);
     }
