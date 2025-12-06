@@ -190,7 +190,9 @@
             <p class="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
                 Tim kami siap membantu mewujudkan rangkaian bunga sesuai keinginan Anda. Hubungi kami untuk konsultasi gratis!
             </p>
+            <a href="https://wa.me/6285808933346?text=Halo%20Lla%20Florist,%20saya%20tertarik%20dengan%20rangkaian%20bunganya" target="_blank">
             <x-button>Hubungi Kami</x-button>
+            </a>
         </div>
     </section>
 
