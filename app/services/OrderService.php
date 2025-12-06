@@ -344,4 +344,139 @@ class OrderService
 
         return $result;
     }
+
+    public function getMonthlyOrderSummary(object $request)
+    {
+        $month = $request->month ?? Carbon::now('Asia/Jakarta')->month;
+        $year  = $request->year ?? Carbon::now('Asia/Jakarta')->year;
+
+        $startDate = Carbon::createFromDate($year, $month, 1, 'Asia/Jakarta')->startOfDay();
+        $endDate   = Carbon::createFromDate($year, $month, 1, 'Asia/Jakarta')->endOfMonth()->endOfDay();
+
+        $query = Order::query()
+            ->whereBetween('created_at', [$startDate, $endDate]);
+
+        $totalOrders = (clone $query)->count();
+
+        $totalCompleted = (clone $query)
+            ->where('status', 'completed')
+            ->count();
+
+        $totalCanceled = (clone $query)
+            ->where('status', 'canceled')
+            ->count();
+
+        $totalProcess = (clone $query)
+            ->where('status', 'process')
+            ->count();
+
+        $totalLate = (clone $query)
+            ->where('status', 'process')
+            ->where('schedule', '<', Carbon::now('Asia/Jakarta'))
+            ->count();
+
+        $totalRevenue = Order::where('status', 'completed')
+            ->where('is_paid', true)
+            ->whereBetween('created_at', [$startDate, $endDate])
+            ->sum('total_amount');
+
+        return [
+            'totalOrders' => $totalOrders,
+            'totalCompleted' => $totalCompleted,
+            'totalCanceled' => $totalCanceled,
+            'totalProcess' => $totalProcess,
+            'totalLate' => $totalLate,
+            'totalRevenue' => $totalRevenue
+        ];
+    }
+
+    public function getMonthlyOrderChart(object $request)
+    {
+        $month = $request->month ?? Carbon::now('Asia/Jakarta')->month;
+        $year  = $request->year ?? Carbon::now('Asia/Jakarta')->year;
+
+        $startDate = Carbon::create($year, $month, 1)->startOfMonth();
+        $endDate   = Carbon::create($year, $month, 1)->endOfMonth();
+
+        $orders = Order::selectRaw('DATE(created_at) as date, COUNT(*) as order_count')
+            ->whereBetween('created_at', [$startDate, $endDate])
+            ->groupBy('date')
+            ->orderBy('date')
+            ->get()
+            ->keyBy('date');
+
+        $chartData = [];
+        $current = $startDate->copy();
+
+        while ($current->lte($endDate)) {
+            $dateString = $current->format('Y-m-d');
+
+            $chartData[] = [
+                'date'  => $dateString,
+                'order' => $orders->has($dateString)
+                    ? (int)$orders[$dateString]->order_count
+                    : 0,
+            ];
+
+            $current->addDay();
+        }
+
+        return $chartData;
+    }
+
+    public function getShippingMethodStats(object $request)
+    {
+        $month = $request->month ?? Carbon::now('Asia/Jakarta')->month;
+        $year  = $request->year ?? Carbon::now('Asia/Jakarta')->year;
+
+        $startDate = Carbon::create($year, $month, 1)->startOfMonth();
+        $endDate   = Carbon::create($year, $month, 1)->endOfMonth();
+
+        $results = Order::selectRaw('shipping_method, COUNT(*) as total')
+            ->whereBetween('created_at', [$startDate, $endDate])
+            ->groupBy('shipping_method')
+            ->get()
+            ->keyBy('shipping_method');
+
+        return [
+            [
+                'shipping_method' => 'delivery',
+                'orders' => isset($results['delivery']) ? (int)$results['delivery']->total : 0,
+                'fill' => 'var(--color-delivery)',
+            ],
+            [
+                'shipping_method' => 'pickup',
+                'orders' => isset($results['pickup']) ? (int)$results['pickup']->total : 0,
+                'fill' => 'var(--color-pickup)',
+            ],
+        ];
+    }
+
+    public function getPaymentStatusStats(object $request)
+    {
+        $month = $request->month ?? Carbon::now('Asia/Jakarta')->month;
+        $year  = $request->year ?? Carbon::now('Asia/Jakarta')->year;
+
+        $startDate = Carbon::create($year, $month, 1)->startOfMonth();
+        $endDate   = Carbon::create($year, $month, 1)->endOfMonth();
+
+        $results = Order::selectRaw('is_paid, COUNT(*) as total')
+            ->whereBetween('created_at', [$startDate, $endDate])
+            ->groupBy('is_paid')
+            ->get()
+            ->keyBy('is_paid');
+
+        return [
+            [
+                'is_paid' => 'paid',
+                'orders' => isset($results[1]) ? (int)$results[1]->total : 0,
+                'fill' => 'var(--color-paid)',
+            ],
+            [
+                'is_paid' => 'unpaid',
+                'orders' => isset($results[0]) ? (int)$results[0]->total : 0,
+                'fill' => 'var(--color-unpaid)',
+            ],
+        ];
+    }
 }

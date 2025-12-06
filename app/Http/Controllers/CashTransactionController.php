@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\CashTransactionExport;
 use App\Http\Requests\CashTransactions\CashTransactionRequest;
 use App\Models\CashTransaction;
 use App\Services\CashTransactionService;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Maatwebsite\Excel\Facades\Excel;
 use PhpParser\Node\Stmt\TryCatch;
 
 class CashTransactionController extends Controller
@@ -98,5 +100,18 @@ class CashTransactionController extends Controller
         } catch (\Exception $e) {
             return to_route('cash-transactions.index')->with('error', $e->getMessage());
         }
+    }
+
+    public function exportExcel(Request $request)
+    {
+        $month = $request->month ?? now()->month;
+        $year  = $request->year ?? now()->year;
+        
+        $fileName = "transaksi-kas-{$year}-{$month}.xlsx";
+
+        return Excel::download(
+            new CashTransactionExport($year, $month),
+            $fileName
+        );
     }
 }

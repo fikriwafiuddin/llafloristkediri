@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\ProductsExport;
 use App\Http\Requests\products\ProductRequestCreate;
 use App\Http\Requests\products\ProductRequestUpdate;
 use App\Models\Product;
@@ -9,6 +10,7 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\services\CategoryService;
 use App\Services\ProductService;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ProductController extends Controller
 {
@@ -97,5 +99,10 @@ class ProductController extends Controller
         $this->productService->destroy($id);
 
         return to_route('products.index')->with('success', 'Produk berhasil dihapus');
+    }
+
+    public function exportExcel()
+    {
+        return Excel::download(new ProductsExport, 'products.xlsx');
     }
 }

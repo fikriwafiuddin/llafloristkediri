@@ -230,4 +230,65 @@ class CashTransactionService
 
         return $result;
     }
+
+    public function getMonthlyCashTransactionSummary(object $request)
+    {
+        $month = $request->month ?? Carbon::now('Asia/Jakarta')->month;
+        $year = $request->year ?? Carbon::now('Asia/Jakarta')->year;
+
+        $startDate = Carbon::create($year, $month, 1)->startOfMonth();
+        $endDate   = Carbon::create($year, $month, 1)->endOfMonth();
+
+        $results = CashTransaction::selectRaw('type, SUM(amount) as total')
+            ->whereBetween('transaction_date', [$startDate, $endDate])
+            ->groupBy('type')
+            ->get()
+            ->keyBy('type');
+
+        return [
+            'totalIncome'  => isset($results['income'])  ? (int) $results['income']->total  : 0,
+            'totalExpense' => isset($results['expense']) ? (int) $results['expense']->total : 0,
+        ];
+    }
+
+    public function getDailyCashflowStats(object $request)
+    {
+        $month = $request->month ?? Carbon::now('Asia/Jakarta')->month;
+        $year = $request->year ?? Carbon::now('Asia/Jakarta')->year;
+
+        $startDate = Carbon::create($year, $month, 1)->startOfMonth();
+        $endDate   = Carbon::create($year, $month, 1)->endOfMonth();
+
+        $transactions = CashTransaction::selectRaw("
+                DATE(transaction_date) as date,
+                SUM(CASE WHEN type = 'income' THEN amount ELSE 0 END) AS total_income,
+                SUM(CASE WHEN type = 'expense' THEN amount ELSE 0 END) AS total_expense
+            ")
+            ->whereBetween('transaction_date', [$startDate, $endDate])
+            ->groupBy('date')
+            ->orderBy('date')
+            ->get()
+            ->keyBy('date');
+
+        $results = [];
+
+        $cursor = $startDate->copy();
+        while ($cursor->lte($endDate)) {
+            $dateString = $cursor->toDateString();
+
+            $results[] = [
+                'date'    => $dateString,
+                'income'  => isset($transactions[$dateString]) 
+                                ? (int) $transactions[$dateString]->total_income 
+                                : 0,
+                'expense' => isset($transactions[$dateString]) 
+                                ? (int) $transactions[$dateString]->total_expense 
+                                : 0,
+            ];
+
+            $cursor->addDay();
+        }
+
+        return $results;
+    }
 }
