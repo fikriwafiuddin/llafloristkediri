@@ -15,6 +15,7 @@ import categories from '@/routes/categories';
 import materials from '@/routes/materials';
 import orders from '@/routes/orders';
 import products from '@/routes/products';
+import reports from '@/routes/reports';
 import schedules from '@/routes/schedules';
 import testimonials from '@/routes/testimonials';
 import { type NavItem } from '@/types';
@@ -23,6 +24,7 @@ import {
     ArchiveIcon,
     BookOpen,
     CalendarDaysIcon,
+    ChartAreaIcon,
     FlowerIcon,
     FolderIcon,
     LayoutGrid,
@@ -77,6 +79,11 @@ const mainNavItems: NavItem[] = [
         title: 'Kas',
         href: cashTransactions.index(),
         icon: NotebookIcon,
+    },
+    {
+        title: 'Laporan',
+        href: reports.index(),
+        icon: ChartAreaIcon,
     },
 ];
 

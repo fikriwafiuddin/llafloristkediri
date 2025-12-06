@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\TestimonialsController;
 use App\Http\Controllers\User\AboutController;
@@ -42,6 +43,8 @@ Route::middleware(['auth', 'verified'])->prefix("/admin")->group(function () {
     Route::resource('schedules', ScheduleController::class);
 
     Route::resource('cash-transactions', CashTransactionController::class);
+
+    Route::get('/reports', [ReportController::class, 'index'])->name('reports.index');
 });
 
 Route::name('user.')->group(function() {
