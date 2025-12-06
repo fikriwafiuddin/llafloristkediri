@@ -7,7 +7,7 @@ import {
     CardTitle,
 } from '@/components/ui/card';
 import AppLayout from '@/layouts/app-layout';
-import { index, product } from '@/routes/reports';
+import { index, order, product } from '@/routes/reports';
 import { BreadcrumbItem } from '@/types';
 import { Head, Link } from '@inertiajs/react';
 import {
@@ -58,8 +58,10 @@ function ReportIndexPage() {
                                 <BookOpenIcon className="size-16" />
                             </div>
                             <CardFooter>
-                                <Button size="sm" className="w-full">
-                                    Lihat detail <ArrowRightIcon />
+                                <Button size="sm" className="w-full" asChild>
+                                    <Link href={order()}>
+                                        Lihat detail <ArrowRightIcon />
+                                    </Link>
                                 </Button>
                             </CardFooter>
                         </CardContent>
