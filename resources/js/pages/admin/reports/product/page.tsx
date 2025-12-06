@@ -2,6 +2,7 @@ import StatCard from '@/components/stat-card';
 import { Button } from '@/components/ui/button';
 
 import AppLayout from '@/layouts/app-layout';
+import { excel } from '@/routes/products/export';
 import { index, product } from '@/routes/reports';
 import { BreadcrumbItem } from '@/types';
 import { Head } from '@inertiajs/react';
@@ -62,8 +63,14 @@ function ReportProducPage({
                 </div>
 
                 <div className="flex justify-end">
-                    <Button>
-                        Unduh Data Produk <DownloadIcon />
+                    <Button asChild>
+                        <a
+                            href={excel().url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            Unduh Data Produk <DownloadIcon />
+                        </a>
                     </Button>
                 </div>
 

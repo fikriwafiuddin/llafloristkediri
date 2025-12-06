@@ -31,6 +31,7 @@ Route::middleware(['auth', 'verified'])->prefix("/admin")->group(function () {
     Route::resource('categories', CategoryController::class);
 
     Route::resource('products', ProductController::class);
+    Route::get('/products/export/excel', [ProductController::class, 'exportExcel'])->name('products.export.excel');
 
     Route::resource('testimonials', TestimonialsController::class);
 
