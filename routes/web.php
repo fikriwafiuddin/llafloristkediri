@@ -45,6 +45,7 @@ Route::middleware(['auth', 'verified'])->prefix("/admin")->group(function () {
     Route::resource('cash-transactions', CashTransactionController::class);
 
     Route::get('/reports', [ReportController::class, 'index'])->name('reports.index');
+    Route::get('/reports/product', [ReportController::class, 'product'])->name('reports.product');
 });
 
 Route::name('user.')->group(function() {

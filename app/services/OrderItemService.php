@@ -165,4 +165,114 @@ class OrderItemService
                         ];
                     });
     }
+
+    public function getMostPopularProductsByMonth(object $request, int $limit = 5)
+    {
+        $month = $request->month ?? Carbon::now('Asia/Jakarta')->month;
+        $year = $request->year ?? Carbon::now('Asia/Jakarta')->year;
+
+        $startDate = Carbon::createFromDate($year, $month, 1, 'Asia/Jakarta')->startOfDay();
+        $endDate = Carbon::createFromDate($year, $month, 1, 'Asia/Jakarta')->endOfMonth()->endOfDay();
+
+        $items = OrderItem::query()
+                    ->select('product_id')
+                    ->selectRaw('COUNT(*) as total_orders')
+                    ->selectRaw('SUM(quantity) as total_quantity')
+                    ->with('product')
+                    ->whereHas('order', function ($query) use ($startDate, $endDate) {
+                        $query->whereBetween('created_at', [$startDate, $endDate]);
+                    })
+                    ->groupBy('product_id')
+                    ->get();
+
+        $results = [];
+        $customTotalOrders = 0;
+        $customTotalQuantity = 0;
+
+        foreach ($items as $item) {
+            if (is_null($item->product_id)) {
+                $customTotalOrders += $item->total_orders;
+                $customTotalQuantity += $item->total_quantity;
+            } else {
+                $results[] = [
+                    'product_id' => $item->product_id,
+                    'name' => $item->product->name ?? 'Unknown',
+                    'total_orders' => $item->total_orders,
+                    'total_quantity' => $item->total_quantity,
+                    'is_custom' => false,
+                ];
+            }
+        }
+
+        if ($customTotalQuantity > 0) {
+            $results[] = [
+                'product_id' => null,
+                'name' => 'Custom Item',
+                'total_orders' => $customTotalOrders,
+                'total_quantity' => $customTotalQuantity,
+                'is_custom' => true,
+            ];
+        }
+
+        usort($results, function ($a, $b) {
+            return $b['total_quantity'] - $a['total_quantity'];
+        });
+
+        return collect($results)->take($limit);
+    }
+
+    public function getLowestProductsByMonth(object $request, int $limit = 5)
+    {
+        $month = $request->month ?? Carbon::now('Asia/Jakarta')->month;
+        $year = $request->year ?? Carbon::now('Asia/Jakarta')->year;
+
+        $startDate = Carbon::createFromDate($year, $month, 1, 'Asia/Jakarta')->startOfDay();
+        $endDate = Carbon::createFromDate($year, $month, 1, 'Asia/Jakarta')->endOfMonth()->endOfDay();
+
+        $items = OrderItem::query()
+                    ->select('product_id')
+                    ->selectRaw('COUNT(*) as total_orders')
+                    ->selectRaw('SUM(quantity) as total_quantity')
+                    ->with('product')
+                    ->whereHas('order', function ($query) use ($startDate, $endDate) {
+                        $query->whereBetween('created_at', [$startDate, $endDate]);
+                    })
+                    ->groupBy('product_id')
+                    ->get();
+
+        $results = [];
+        $customTotalOrders = 0;
+        $customTotalQuantity = 0;
+
+        foreach ($items as $item) {
+            if (is_null($item->product_id)) {
+                $customTotalOrders += $item->total_orders;
+                $customTotalQuantity += $item->total_quantity;
+            } else {
+                $results[] = [
+                    'product_id' => $item->product_id,
+                    'name' => $item->product->name ?? 'Unknown',
+                    'total_orders' => $item->total_orders,
+                    'total_quantity' => $item->total_quantity,
+                    'is_custom' => false,
+                ];
+            }
+        }
+
+        if ($customTotalQuantity > 0) {
+            $results[] = [
+                'product_id' => null,
+                'name' => 'Custom Item',
+                'total_orders' => $customTotalOrders,
+                'total_quantity' => $customTotalQuantity,
+                'is_custom' => true,
+            ];
+        }
+
+        usort($results, function ($a, $b) {
+            return $a['total_quantity'] - $b['total_quantity'];
+        });
+
+        return collect($results)->take($limit);
+    }
 }
