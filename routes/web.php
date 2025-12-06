@@ -37,7 +37,7 @@ Route::middleware(['auth', 'verified'])->prefix("/admin")->group(function () {
 
     Route::resource('materials', MaterialController::class);
 
-    Route::get('/orders/export-excel', [OrderController::class, 'exportExcel'])->name('orders.export.excel');
+    Route::get('/orders/export/excel', [OrderController::class, 'exportExcel'])->name('orders.export.excel');
     Route::resource('orders', OrderController::class);
     Route::get('pos', [OrderController::class, 'pos'])->name('orders.pos');
     Route::patch('update-status/{id}', [OrderController::class, 'updateStatus'])->name('orders.updateStatus');
@@ -45,6 +45,7 @@ Route::middleware(['auth', 'verified'])->prefix("/admin")->group(function () {
     Route::resource('schedules', ScheduleController::class);
 
     Route::resource('cash-transactions', CashTransactionController::class);
+    Route::get('/cash-transactions/export/excel', [CashTransactionController::class, 'exportExcel'])->name('cash-transactions.export.excel');
 
     Route::get('/reports', [ReportController::class, 'index'])->name('reports.index');
     Route::get('/reports/product', [ReportController::class, 'product'])->name('reports.product');

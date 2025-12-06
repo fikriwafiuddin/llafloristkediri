@@ -1,6 +1,7 @@
 import StatCard from '@/components/stat-card';
 import { Button } from '@/components/ui/button';
 import AppLayout from '@/layouts/app-layout';
+import { excel } from '@/routes/cash-transactions/export';
 import { cashTransaction, index } from '@/routes/reports';
 import { BreadcrumbItem } from '@/types';
 import { Head } from '@inertiajs/react';
@@ -56,8 +57,14 @@ function ReportCashTransactionPage({
                 <FiltersSection filters={filters} />
 
                 <div className="flex justify-end">
-                    <Button>
-                        Unduh Data Kas <DownloadIcon />
+                    <Button asChild>
+                        <a
+                            href={`${excel().url}?year=${filters.year || new Date().getFullYear()}&month=${filters.month || new Date().getMonth() + 1}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            Unduh Data Kas <DownloadIcon />
+                        </a>
                     </Button>
                 </div>
 
