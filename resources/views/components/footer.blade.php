@@ -58,7 +58,7 @@
                             <circle cx="12" cy="10" r="3"></circle>
                         </svg>
                         <span class="text-sm text-muted-foreground">
-                            Jl. Brawijaya No. 123, Kediri, Jawa Timur
+                            Jl. Selomangleng, Kec Mojoroto Kota Kediri, Jawa Timur
                         </span>
                     </li>
                     <li class="flex items-center space-x-2">
@@ -78,39 +78,13 @@
                             <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
                         </svg>
                         <span class="text-sm text-muted-foreground">
-                            +62 812-3456-7890
+                            085808933346
                         </span>
                     </li>
-                    <li class="flex items-center space-x-2">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            class="lucide lucide-mail h-4 w-4 text-primary"
-                            aria-hidden="true"
-                        >
-                            <path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"></path>
-                            <rect
-                                x="2"
-                                y="4"
-                                width="20"
-                                height="16"
-                                rx="2"
-                            ></rect>
-                        </svg>
-                        <span class="text-sm text-muted-foreground">
-                            hello@llaflorist.com
-                        </span>
-                    </li>
+                    
                 </ul>
-                <div class="flex space-x-3 mt-4">
-                    <a href="#" class="text-muted-foreground hover:text-primary transition-colors">
+               <div class="mt-4">
+                    <a href="#" class="flex items-center space-x-2 text-muted-foreground hover:text-primary transition-colors">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="24"
@@ -124,39 +98,11 @@
                             class="lucide lucide-instagram h-5 w-5"
                             aria-hidden="true"
                         >
-                            <rect
-                                width="20"
-                                height="20"
-                                x="2"
-                                y="2"
-                                rx="5"
-                                ry="5"
-                            ></rect>
+                            <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
                             <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                            <line
-                                x1="17.5"
-                                x2="17.51"
-                                y1="6.5"
-                                y2="6.5"
-                            ></line>
+                            <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
                         </svg>
-                    </a>
-                    <a href="#" class="text-muted-foreground hover:text-primary transition-colors">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            class="lucide lucide-facebook h-5 w-5"
-                            aria-hidden="true"
-                        >
-                            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
-                        </svg>
+                        <span class="text-sm font-medium">@ellasantaossa</span>
                     </a>
                 </div>
             </div>
