@@ -100,6 +100,14 @@ function FiltersSection({ filters }: FiltersSectionProps) {
             paymentChanged ||
             shippingMethodChanged
         ) {
+            prevCustomerName.current = String(debouncedCustomerName);
+            prevWhatsapp.current = String(debouncedWhatsapp);
+            prevYear.current = String(debouncedYear);
+            prevMonth.current = String(debouncedMonth);
+            prevStatus.current = String(debouncedStatus);
+            prevPayment.current = String(debouncedPayment);
+            prevShippingMethod.current = String(debouncedShippingMethod);
+
             router.get(
                 index().url,
                 {

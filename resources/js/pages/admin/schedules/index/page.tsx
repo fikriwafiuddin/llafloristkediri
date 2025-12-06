@@ -62,6 +62,7 @@ function ScheduleIndexPage({ schedules, statistics }: ScheduleIndexPageProps) {
         const dateChange = debouncedDate !== prevDate.current;
 
         if (dateChange) {
+            prevDate.current = String(debouncedDate);
             router.get(
                 index().url,
                 {

@@ -37,7 +37,8 @@ type FiltersSectionProps = {
 
 function FiltersSection({ filters }: FiltersSectionProps) {
     const initialYear = filters.year || new Date().getFullYear().toString();
-    const initialMonth = filters.month || new Date().getMonth().toString();
+    const initialMonth =
+        filters.month || (new Date().getMonth() + 1).toString();
     const initialType = filters.type || 'all';
 
     const [year, setYear] = useState(initialYear);
@@ -65,6 +66,10 @@ function FiltersSection({ filters }: FiltersSectionProps) {
         const typeChanged = deboundedType !== prevType.current;
 
         if (yearChanged || monthChanged || typeChanged) {
+            prevYear.current = String(debouncedYear);
+            prevMonth.current = String(debouncedMonth);
+            prevType.current = String(deboundedType);
+
             router.get(index().url, {
                 year: debouncedYear,
                 month: debouncedMonth,
