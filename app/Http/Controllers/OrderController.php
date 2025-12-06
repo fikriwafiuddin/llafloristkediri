@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\OrdersExport;
 use App\Http\Requests\Orders\OrderRequestCreate;
 use App\Http\Requests\Orders\OrderRequestUpdate;
 use App\Http\Requests\Orders\OrderRequestUpdateStatus;
@@ -12,6 +13,7 @@ use App\Services\ProductService;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Maatwebsite\Excel\Facades\Excel;
 
 class OrderController extends Controller
 {
@@ -129,5 +131,15 @@ class OrderController extends Controller
         $order = $this->orderService->getById($id);
 
         return view('order_pdf', ['order' => $order]);
+    }
+
+    public function exportExcel(Request $request)
+    {
+        $month = $request->month ?? now()->month;
+        $year  = $request->year ?? now()->year;
+
+        $filename = "orders_{$year}_{$month}.xlsx";
+
+        return Excel::download(new OrdersExport($month, $year), $filename);
     }
 }

@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import AppLayout from '@/layouts/app-layout';
 import { formatCurrency } from '@/lib/utils';
+import { excel } from '@/routes/orders/export';
 import { index, order } from '@/routes/reports';
 import { BreadcrumbItem } from '@/types';
 import { Head } from '@inertiajs/react';
@@ -119,8 +120,14 @@ function ReportOrderPage({
                 </Card>
 
                 <div className="flex justify-end">
-                    <Button>
-                        Unduh Data Produk <DownloadIcon />
+                    <Button asChild>
+                        <a
+                            href={`${excel().url}?year=${filters.year || new Date().getFullYear()}&month=${filters.month || new Date().getMonth() + 1}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            Unduh Data Pesanan <DownloadIcon />
+                        </a>
                     </Button>
                 </div>
 
