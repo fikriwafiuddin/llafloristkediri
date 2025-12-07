@@ -36,11 +36,11 @@ Route::middleware(['auth', 'verified'])->prefix("/admin")->group(function () {
     Route::resource('testimonials', TestimonialsController::class);
 
     Route::resource('materials', MaterialController::class);
-
+    
+    Route::patch('/orders/update-status/{id}', [OrderController::class, 'updateStatus'])->name('orders.updateStatus');
     Route::get('/orders/export/excel', [OrderController::class, 'exportExcel'])->name('orders.export.excel');
     Route::resource('orders', OrderController::class);
     Route::get('pos', [OrderController::class, 'pos'])->name('orders.pos');
-    Route::patch('update-status/{id}', [OrderController::class, 'updateStatus'])->name('orders.updateStatus');
 
     Route::resource('schedules', ScheduleController::class);
 

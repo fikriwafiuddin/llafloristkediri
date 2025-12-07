@@ -10,29 +10,43 @@ import { Spinner } from '@/components/ui/spinner';
 import { translateStatus } from '@/lib/utils';
 import { updateStatus } from '@/routes/orders';
 import { Order } from '@/types';
-import { useForm } from '@inertiajs/react';
+import { router } from '@inertiajs/react';
+import { useState } from 'react';
 
 type UpdateStatusProps = {
     order: Order;
 };
 
 function UpdateStatus({ order }: UpdateStatusProps) {
-    const { data, setData, processing, patch } = useForm({
-        status: order.status,
-    });
+    const [status, setStatus] = useState(order.status);
+    const [processing, setProcessing] = useState(false);
 
-    const handleCangeStatus = (value: string) => {
-        setData('status', value);
-        patch(updateStatus(order.id).url, {
-            preserveScroll: true,
-        });
+    const handleStatusChange = (newStatus: string) => {
+        if (newStatus === status) return;
+        setStatus(newStatus);
+
+        setProcessing(true);
+
+        router.patch(
+            updateStatus(order.id),
+            { status: newStatus },
+            {
+                preserveScroll: true,
+                onSuccess: () => {
+                    setProcessing(false);
+                },
+                onError: () => {
+                    setProcessing(false);
+                },
+            },
+        );
     };
 
     return (
         <Select
             disabled={processing}
-            value={data.status}
-            onValueChange={handleCangeStatus}
+            value={status}
+            onValueChange={handleStatusChange}
         >
             <SelectTrigger>
                 <SelectValue placeholder="Pilih status" />
@@ -42,7 +56,7 @@ function UpdateStatus({ order }: UpdateStatusProps) {
                     {['process', 'completed', 'canceled'].map((status) => (
                         <SelectItem key={status} value={status}>
                             {translateStatus(status)}{' '}
-                            {processing && data.status === status && (
+                            {processing && status === status && (
                                 <Spinner className="ml-2 h-4 w-4" />
                             )}
                         </SelectItem>

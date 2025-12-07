@@ -124,6 +124,8 @@ class OrderController extends Controller
     public function updateStatus(OrderRequestUpdateStatus $request, int $id)
     {
         $this->orderService->updateStatus($request->validated(), $id);
+
+        return back()->with('success', 'Status pesanan berhasil diperbarui.');
     }
 
     public function streamPdf(int $id)
