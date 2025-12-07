@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\categories\CategoryRequest;
 use App\Models\Category;
-use App\services\CategoryService;
+use App\Services\CategoryService;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 

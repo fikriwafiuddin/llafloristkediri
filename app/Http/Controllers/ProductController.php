@@ -8,7 +8,7 @@ use App\Http\Requests\products\ProductRequestUpdate;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
-use App\services\CategoryService;
+use App\Services\CategoryService;
 use App\Services\ProductService;
 use Maatwebsite\Excel\Facades\Excel;
 

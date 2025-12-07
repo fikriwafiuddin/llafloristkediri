@@ -7,7 +7,7 @@ use App\Http\Requests\Orders\OrderRequestCreate;
 use App\Http\Requests\Orders\OrderRequestUpdate;
 use App\Http\Requests\Orders\OrderRequestUpdateStatus;
 use App\Models\Order;
-use App\services\CategoryService;
+use App\Services\CategoryService;
 use App\Services\OrderService;
 use App\Services\ProductService;
 use Barryvdh\DomPDF\Facade\Pdf;
