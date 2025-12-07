@@ -11,6 +11,7 @@ import { BreadcrumbItem, Material } from '@/types';
 import { Head, Link, router, usePage } from '@inertiajs/react';
 import { CheckCircleIcon } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
+import CalculatorSheet from './CalculatorSheet';
 import columns from './columns';
 
 const breadcrumbs: BreadcrumbItem[] = [
@@ -99,10 +100,15 @@ function MaterialIndexPage({ materials, filters }: MaterialIndexPageProps) {
                                 <Input
                                     value={search}
                                     onChange={(e) => setSearch(e.target.value)}
-                                    placeholder="Cari produk"
+                                    placeholder="Cari bahan"
                                 />
                             </div>
                         </div>
+
+                        <div className="flex items-center justify-end gap-2">
+                            <CalculatorSheet />
+                        </div>
+
                         <DataTable data={materials.data} columns={columns} />
                         <AppPagination
                             current_page={materials.current_page}

@@ -6,6 +6,7 @@ import { Link } from '@inertiajs/react';
 import { ColumnDef } from '@tanstack/react-table';
 import { EditIcon } from 'lucide-react';
 import DeleteMaterial from '../DeleteMaterial';
+import AddItemCalculator from './AddItemCalculator';
 
 const columns: ColumnDef<Material>[] = [
     {
@@ -43,6 +44,7 @@ const columns: ColumnDef<Material>[] = [
                         </Button>
                     </Link>
                     <DeleteMaterial id={id} />
+                    <AddItemCalculator material={row.original} />
                 </div>
             );
         },
