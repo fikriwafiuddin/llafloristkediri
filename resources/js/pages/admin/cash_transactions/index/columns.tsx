@@ -39,7 +39,9 @@ const columns: ColumnDef<CashTransaction>[] = [
     {
         accessorKey: 'transaction_date',
         header: 'Tanggal Transaksi',
-        cell: ({ row }) => formatDate(row.getValue('transaction_date')),
+        cell: ({ row }) => {
+            return <>{formatDate(row.original.created_at)}</>;
+        },
     },
     {
         header: 'Aksi',

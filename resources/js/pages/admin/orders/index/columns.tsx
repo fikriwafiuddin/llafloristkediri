@@ -1,5 +1,6 @@
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { formatDate } from '@/lib/utils';
 import { edit, show } from '@/routes/orders';
 import { Order } from '@/types';
 import { Link } from '@inertiajs/react';
@@ -26,10 +27,7 @@ const columns: ColumnDef<Order>[] = [
     {
         accessorKey: 'created_at',
         header: 'Dibuat',
-        cell: ({ row }) =>
-            format(row.original.created_at, 'dd MMMM yyyy HH:mm', {
-                locale: id,
-            }),
+        cell: ({ row }) => formatDate(row.original.created_at),
     },
     {
         accessorKey: 'schedule',

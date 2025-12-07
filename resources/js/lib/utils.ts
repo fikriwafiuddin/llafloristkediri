@@ -40,7 +40,7 @@ export function formatCurrency(amount: number): string {
 }
 
 export function formatDate(dateString: string | Date): string {
-    return format(new Date(dateString), 'dd MMMM yyyy HH:mm', {
+    return format(dateString, 'dd MMMM yyyy HH:mm', {
         locale: id,
     });
 }

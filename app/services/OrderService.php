@@ -69,7 +69,7 @@ class OrderService
                     'type' => 'income',
                     'category' => 'Pesanan',
                     'amount' => $totalAmount,
-                    'transaction_date' => $schedule,
+                    'transaction_date' => now(),
                     'description' => "Pembayaran pesanan dari {$data['customer_name']}"
                 ]);
             }
@@ -100,7 +100,7 @@ class OrderService
                     'type' => 'income',
                     'category' => 'Pesanan',
                     'amount' => $order->total_amount,
-                    'transaction_date' => $schedule,
+                    'transaction_date' => now(),
                     'description' => "Pembayaran pesanan dari {$order->customer_name}"
                 ]);
             }
@@ -148,8 +148,8 @@ class OrderService
                     ->when($request->whatsapp, function ($query, $whatsapp) {
                         $query->where('whatsapp_number', 'like', "%{$whatsapp}%");
                     })
-                    ->whereYear('schedule', $year)
-                    ->whereMonth('schedule', $month)
+                    ->whereYear('created_at', $year)
+                    ->whereMonth('created_at', $month)
                     ->when($request->status !== 'all', function ($query) use ($request) {
                         if (!empty($request->status)) {
                             $query->where('status', strtolower($request->status));
