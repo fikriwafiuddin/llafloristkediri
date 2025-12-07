@@ -192,7 +192,6 @@ class OrderService
 
         $orders = Order::query()
                     ->whereDate('schedule', $parsedDate)
-                    ->with(['orderItems.product'])
                     ->paginate(10);
 
         return $orders;

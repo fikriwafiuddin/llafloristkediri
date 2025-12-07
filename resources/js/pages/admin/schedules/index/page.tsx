@@ -40,10 +40,15 @@ type ScheduleIndexPageProps = {
         completed: number;
         cancelled: number;
     };
+    filters: { date: string };
 };
 
-function ScheduleIndexPage({ schedules, statistics }: ScheduleIndexPageProps) {
-    const initialDate = new Date().toString();
+function ScheduleIndexPage({
+    schedules,
+    statistics,
+    filters,
+}: ScheduleIndexPageProps) {
+    const initialDate = filters.date || new Date().toString();
 
     const [date, setDate] = useState(initialDate);
 
@@ -63,12 +68,18 @@ function ScheduleIndexPage({ schedules, statistics }: ScheduleIndexPageProps) {
 
         if (dateChange) {
             prevDate.current = String(debouncedDate);
+            const year = new Date(String(debouncedDate)).getFullYear();
+            const month = String(
+                new Date(String(debouncedDate)).getMonth() + 1,
+            ).padStart(2, '0');
+            const day = String(
+                new Date(String(debouncedDate)).getDate(),
+            ).padStart(2, '0');
+
             router.get(
                 index().url,
                 {
-                    date: new Date(debouncedDate as string)
-                        .toISOString()
-                        .split('T')[0],
+                    date: `${year}-${month}-${day}`,
                 },
                 {
                     preserveState: true,

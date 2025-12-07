@@ -26,7 +26,7 @@ class ScheduleController extends Controller
         return Inertia::render('admin/schedules/index/page', [
             'schedules' => $schedules,
             'statistics' => $statistics,
-            'date' => $request->only(['date'])
+            'filters' => $request->only(['date'])
         ]);
     }
 
