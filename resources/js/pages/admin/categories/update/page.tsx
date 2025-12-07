@@ -28,7 +28,7 @@ type CategoryUpdatePageProps = {
 };
 
 function CategoryUpdatePage({ category }: CategoryUpdatePageProps) {
-    const { submit, data, setData, processing, errors } = useForm({
+    const { submit, data, setData, processing, errors, isDirty } = useForm({
         name: category.name,
     });
 
@@ -39,7 +39,7 @@ function CategoryUpdatePage({ category }: CategoryUpdatePageProps) {
 
     return (
         <AppLayout breadcrumbs={breadcrumbs(category.id)}>
-            <Head title="Tambah Kategori" />
+            <Head title="Update Kategori" />
             <div className="space-y-4 p-4">
                 <div className="flex flex-col justify-between gap-4 sm:flex-row">
                     <h2 className="text-2xl font-semibold">Kelola Kategori</h2>
@@ -88,7 +88,10 @@ function CategoryUpdatePage({ category }: CategoryUpdatePageProps) {
                                         </span>
                                     )}
                                 </div>
-                                <Button type="submit" disabled={processing}>
+                                <Button
+                                    type="submit"
+                                    disabled={processing || !isDirty}
+                                >
                                     {processing ? <Spinner /> : 'Simpan'}
                                 </Button>
                             </div>

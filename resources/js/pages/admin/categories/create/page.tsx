@@ -22,7 +22,7 @@ const breadcrumbs: BreadcrumbItem[] = [
 ];
 
 function CategoryCreatePage() {
-    const { submit, data, setData, processing, errors } = useForm({
+    const { submit, data, setData, processing, errors, isDirty } = useForm({
         name: '',
     });
 
@@ -82,7 +82,10 @@ function CategoryCreatePage() {
                                         </span>
                                     )}
                                 </div>
-                                <Button type="submit" disabled={processing}>
+                                <Button
+                                    type="submit"
+                                    disabled={processing || !isDirty}
+                                >
                                     {processing ? <Spinner /> : 'Simpan'}
                                 </Button>
                             </div>

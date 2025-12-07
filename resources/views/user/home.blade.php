@@ -12,7 +12,7 @@
                 <p class="text-center sm:text-left text-base sm:text-lg mb-8 text-foreground/80">LLa Florist Kediri hadir untuk setiap momen berharga Anda. Dari wisuda, ulang tahun, hingga pernikahan - kami siap melayani dengan rangkaian bunga segar berkualitas tinggi.</p>
                 <div class="flex flex-col justify-center sm:flex-row sm:justify-start gap-2">
                     <a href="#produkPilihan">
-                        <x-button>
+                        <x-button class="w-full sm:w-auto">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="none"
@@ -27,8 +27,8 @@
                         </x-button>
                     </a>
                     <a href="https://wa.me/6285808933346?text=Halo%20kak,%20saya%20ingin%20pesan%20bunga%20custom."
-                        target="_blank"
-                        <x-button variant="success">
+                        target="_blank">
+                        <x-button variant="success" class="w-full sm:w-auto">
                             <svg
                                 class="size-7 inline"
                                 xmlns="http://www.w3.org/2000/svg"
