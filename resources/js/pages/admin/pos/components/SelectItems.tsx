@@ -1,3 +1,4 @@
+import AppPagination from '@/components/app-pagination';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import {
@@ -21,6 +22,12 @@ type SelectItemsProps = {
     onChangeMode: (mode: 'select' | 'form') => void;
     products: {
         data: Product[];
+        links: {
+            url: string;
+            page: number;
+            active: boolean;
+        }[];
+        current_page: number;
     };
     categories: Category[];
     filters: {
@@ -127,6 +134,11 @@ function SelectItems({
                         <ProductCard key={product.id} product={product} />
                     ))}
                 </div>
+
+                <AppPagination
+                    links={products.links}
+                    current_page={products.current_page}
+                />
             </div>
         </>
     );

@@ -222,7 +222,7 @@ function FiltersSection({ filters }: FiltersSectionProps) {
                         <SelectContent>
                             <SelectGroup>
                                 <SelectItem value="all">Semua</SelectItem>
-                                {['process', 'completed', 'cancelled'].map(
+                                {['completed', 'process', 'canceled'].map(
                                     (status) => (
                                         <SelectItem key={status} value={status}>
                                             {translateStatus(status)}

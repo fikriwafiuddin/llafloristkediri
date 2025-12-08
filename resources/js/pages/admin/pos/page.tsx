@@ -16,6 +16,12 @@ const breadcrumbs: BreadcrumbItem[] = [
 type PosPageProps = {
     products: {
         data: Product[];
+        links: {
+            url: string;
+            page: number;
+            active: boolean;
+        }[];
+        current_page: number;
     };
     categories: Category[];
     filters: {

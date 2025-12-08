@@ -27,16 +27,18 @@ function UpdateStatus({ order }: UpdateStatusProps) {
 
         setProcessing(true);
 
-        router.patch(
-            updateStatus(order.id),
-            { status: newStatus },
+        router.post(
+            updateStatus(order.id).url,
+            {
+                _method: 'PATCH',
+                status: newStatus,
+            },
             {
                 preserveScroll: true,
-                onSuccess: () => {
-                    setProcessing(false);
-                },
+                onSuccess: () => setProcessing(false),
                 onError: () => {
                     setProcessing(false);
+                    setStatus(order.status);
                 },
             },
         );

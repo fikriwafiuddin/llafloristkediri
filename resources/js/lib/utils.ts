@@ -25,7 +25,7 @@ export function translateStatus(status: string): string {
             return 'Diproses';
         case 'completed':
             return 'Selesai';
-        case 'cancelled':
+        case 'canceled':
             return 'Dibatalkan';
         default:
             return status;
